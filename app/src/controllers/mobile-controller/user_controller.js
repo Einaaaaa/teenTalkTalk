@@ -27,11 +27,11 @@ exports.createUser = async function(req, res) {
                 message: '메일이 이미 존재합니다!'
             });
         }
-        let salt = bcrypt.genSaltSync();
-        const pass = bcrypt.hashSync(password, salt);
-        var randomNumber = Math.floor(10000 + Math.random() * 90000);
-        await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
-        await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
+        // let salt = bcrypt.genSaltSync();
+        // const pass = bcrypt.hashSync(password, salt);
+        // var randomNumber = Math.floor(10000 + Math.random() * 90000);
+        // await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
+        // await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
         conn.end();
         return res.json({
             resp: true,
