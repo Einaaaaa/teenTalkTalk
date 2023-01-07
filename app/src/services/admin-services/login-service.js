@@ -1,4 +1,4 @@
-var db = require('../utils/db');
+var db = require('../../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const jwt = require('jsonwebtoken');

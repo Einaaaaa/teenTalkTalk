@@ -15,7 +15,7 @@ const sendEmailVerify = require('../../lib/nodemailer');
 
 
 // const createUser = async (req, res) => {
- const createUser = async function(req, res) {
+exports.createUser = async function(req, res) {
     try {
         const { username, fullname, email, password } = req.body;
         
@@ -73,10 +73,10 @@ const sendEmailVerify = require('../../lib/nodemailer');
 //         });
 //     }
 // };
-const verifyEmail = async function (req, res) {
+exports.verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
-        const [codedb] = await conn.query('SELECT token_temp FROM users WHERE email = ? LIMIT 1', [req.params.email]);
+        const [codedb] = await conn.query('SELECT token_temp FROM tb_user WHERE email = ? LIMIT 1', [req.params.email]);
         const { token_temp } = codedb[0];
         if (req.params.code != token_temp) {
             return res.status(401).json({
@@ -84,7 +84,7 @@ const verifyEmail = async function (req, res) {
                 message: '확인 실패'
             });
         }
-        await conn.query('UPDATE users SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
+        await conn.query('UPDATE tb_user SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
         conn.end();
         return res.json({
             resp: true,
@@ -167,11 +167,11 @@ const verifyEmail = async function (req, res) {
 //         });
 //     }
 // };
-const changePassword = async function(req, res) {
+exports.changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
-        const passdb = await conn.query('SELECT passwordd FROM users WHERE person_uid = ?', [req.idPerson]);
+        const passdb = await conn.query('SELECT passwordd FROM tb_user WHERE userid = ?', [req.idPerson]);
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -180,7 +180,7 @@ const changePassword = async function(req, res) {
         }
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
-        await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [newPass, req.idPerson]);
+        await conn.query('UPDATE tb_user SET passwordd = ? WHERE userid = ?', [newPass, req.idPerson]);
         conn.end();
         return res.json({
             resp: true,
@@ -195,11 +195,11 @@ const changePassword = async function(req, res) {
     }
 };
 
-module.exports = {
-    createUser,
-    verifyEmail,
-    changePassword
-}
+// module.exports = {
+//     createUser,
+//     verifyEmail,
+//     changePassword
+// }
 
 
 // export const changeAccountPrivacy = async (req, res) => {

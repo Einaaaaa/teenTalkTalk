@@ -10,7 +10,7 @@ const connect = require('../../utils/kth.connection');
 const generateJsonWebToken = require('../../lib/generate_jwt');
 const sendEmailVerify = require('../../lib/nodemailer')
 
-const login = async function (req, res) {
+exports.login = async function (req, res) {
     try {
         const { userid, password } = req.body;
         const conn = await connect();
@@ -55,7 +55,7 @@ const login = async function (req, res) {
         });
     }
 };
-const renweLogin = async function (req, res) {
+exports.renweLogin = async function (req, res) {
     try {
         const token = generateJsonWebToken(req.idPerson);
         return res.json({
@@ -71,7 +71,7 @@ const renweLogin = async function (req, res) {
         });
     }
 };
-const resendCodeEmail = async function (email) {
+exports.resendCodeEmail = async function (email) {
     const conn = await connect();
     var randomNumber = Math.floor(10000 + Math.random() * 90000);
     await conn.query('UPDATE tb_user SET token_temp = ? WHERE email = ?', [randomNumber, email]);
@@ -79,8 +79,8 @@ const resendCodeEmail = async function (email) {
     conn.end();
 };
 
-module.exports = {
-    login,
-    renweLogin,
-    resendCodeEmail,
-}
+// module.exports = {
+//     login,
+//     renweLogin,
+//     resendCodeEmail,
+// }
