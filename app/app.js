@@ -21,11 +21,19 @@ const initPassport = require('./src/utils/passport');
 
 
 // test
-const port = 3000;
+// const port = 3000;
 
-app.listen(port, () => {
-  console.log(`APP : SERVER RUN ON PORT ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`APP : SERVER RUN ON PORT ${port}`)
+// })
+
+app.httpServer = createServer(this.app);
+
+// app.listen(port: string) Promise<void> {
+
+//   await app.httpServer.listen( port );
+//   console.log(`SERVER RUN ON PORT ${ port }`)
+// }
 
 app.get('/welcome', (req, res)=>{
   res.send('heehee');

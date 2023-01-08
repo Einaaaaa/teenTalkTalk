@@ -9,7 +9,6 @@ import 'package:login/domain/models/response/default_response.dart';
 // import 'package:login/domain/models/response/response_followings.dart';
 import 'package:login/domain/models/response/response_search.dart';
 import 'package:login/domain/models/response/response_user.dart';
-import 'package:login/domain/models/response/response_user_search.dart';
 
 class UserServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
@@ -21,23 +20,21 @@ class UserServices {
     _streamController.close();
   }
 
-  Future<DefaultResponse> createdUser(String user_id, String user_name,
-      String user_email, String user_pw) async {
+  Future<DefaultResponse> createdUser(
+      String userID, String userName, String userEmail, String userPW) async {
     print('createdUser');
     print('${Environment.urlApi}/user');
+
     final resp =
         await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
       'Accept': 'application/json'
     }, body: {
-      'user_id': user_id,
-      'user_name': user_name,
-      'user_email': user_email,
-      'user_pw': user_pw,
+      'user_id': userID,
+      'user_name': userName,
+      'user_email': userEmail,
+      'user_pw': userPW
     });
-
-    print(resp.headers);
     print(resp.body);
-
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
@@ -51,13 +48,13 @@ class UserServices {
     return ResponseUser.fromJson(jsonDecode(resp.body));
   }
 
-  Future<DefaultResponse> verifyEmail(String user_email, String code) async {
+  Future<DefaultResponse> verifyEmail(String userEmail, String code) async {
     final resp = await http.get(
         // ignore: prefer_interpolation_to_compose_strings
         Uri.parse('${Environment.urlApi}/user/verify-email/' +
             code +
             '/' +
-            user_email),
+            userEmail),
         headers: {'Accept': 'application/json'});
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));

@@ -3,11 +3,11 @@ import 'package:login/ui/widgets/widgets.dart';
 
 void errorMessageSnack(BuildContext context, String error) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    duration: const Duration(seconds: 100),
+    duration: const Duration(seconds: 5),
     content: TextCustom(
       text: error,
       color: Colors.white,
-      fontSize: 9,
+      fontSize: 7,
     ),
     backgroundColor: Colors.red,
   ));

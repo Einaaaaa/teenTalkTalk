@@ -59,33 +59,41 @@ class ResponseUser {
 // }
 
 class User {
-  String user_id;
-  String user_name;
-  String user_email;
-  String user_pw;
+  String userID;
+  String userName;
+  String userEmail;
+  String userPW;
+  String tokenTemp;
+  bool emailVerified;
   // String phone_no;
 
   User({
-    required this.user_id,
-    required this.user_name,
-    required this.user_email,
-    required this.user_pw,
+    required this.userID,
+    required this.userName,
+    required this.userEmail,
+    required this.userPW,
+    required this.tokenTemp,
+    required this.emailVerified,
     // required this.phone_no,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        user_id: json["user_id"] ?? '',
-        user_name: json["user_name"] ?? '',
-        user_email: json["user_email"] ?? '',
-        user_pw: json["user_pw"] ?? '',
+        userID: json["user_id"] ?? '',
+        userName: json["user_name"] ?? '',
+        userEmail: json["user_email"] ?? '',
+        userPW: json["user_pw"] ?? '',
+        tokenTemp: json["token_temp"] ?? '',
+        emailVerified: json["email_verified"] ?? -0,
         // phone_no: json["phone_no"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
-        "user_id": user_id,
-        "user_name": user_name,
-        "user_email": user_email,
-        "user_pw": user_pw,
+        "user_id": userID,
+        "user_name": userName,
+        "user_email": userEmail,
+        "user_pw": userPW,
+        "token_temp": tokenTemp,
+        "email_verified": emailVerified,
         // "phone_no" : phone_no,
       };
 }
