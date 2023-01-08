@@ -44,34 +44,38 @@ app.use(passport.session());
 initPassport();
 app.use(flash());
 
+app.apiRoutes = {
+    user : '/apiUser',
+    auth : '/apiAuth',
+}
+app.use(app.apiRoutes.user, routeUser);
+app.use(app.apiRoutes.auth, routeAuth);
+
 app.use(express.static(`${__dirname}/src/public`)); //정적파일 경로
 app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 app.use("/admin",routerAdmin);
-app.use("/mobile",routeUser); //routerMobile -> routeUser
+//app.use("/mobile",routeUser); 
 
-// test
-const port = 3000;
-app.get('/', (req, res)=>{
-    res.send('heehee');
-})
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-//=========
-
-app.apiRoutes = {
-    user : '/api',
-    auth : '/api',
-}
 
 // mobile - middleware
 app.use(cors);
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-// mobile - routes
-app.use(app.apiRoutes.user, routeUser);
-app.use(app.apiRoutes.auth, routeAuth);
+
+
+// test
+const port = 3000;
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+app.get('/welcome', (req, res)=>{
+    res.send('heehee');
+})
+
+//=========
+
+
 module .exports = app;
 
 

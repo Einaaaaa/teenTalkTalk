@@ -1,10 +1,11 @@
-const Router = require('express');
+
+const express = require("express");
+const router = express.Router();
 const user = require('../../controllers/mobile-controller/user_controller');
 const verifyToken = require('../../middleware/verify_token');
 
 // import { uploadsCover, uploadsProfile } from '../lib/multer';
 
-const router = Router();
 router.post('/user', user.createUser);
 // router.get('/user/get-User-By-Id', verifyToken, user.getUserById);
 router.get('/user/verify-email/:code/:email', user.verifyEmail);
@@ -23,4 +24,12 @@ router.put('/user/change-password', verifyToken, user.changePassword);
 // router.get('/user/get-all-followers', verifyToken, user.getAllFollowers);
 // router.delete('/user/delete-followers/:idUser', verifyToken, user.deleteFollowers);
 // export default router;
+router.get('/hello', async function(req, res){
+    try{
+    res.send('hello route-User');
+    console.log('1');
+    } catch(err){
+        console.log(err);
+    }
+})
 module.exports = router;

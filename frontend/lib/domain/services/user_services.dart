@@ -48,10 +48,12 @@ class UserServices {
     return ResponseUser.fromJson(jsonDecode(resp.body));
   }
 
-  Future<DefaultResponse> verifyEmail(String email, String code) async {
+  Future<DefaultResponse> verifyEmail(String user_email, String code) async {
     final resp = await http.get(
-        Uri.parse(
-            '${Environment.urlApi}/user/verify-email/' + code + '/' + email),
+        Uri.parse('${Environment.urlApi}/user/verify-email/' +
+            code +
+            '/' +
+            user_email),
         headers: {'Accept': 'application/json'});
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
