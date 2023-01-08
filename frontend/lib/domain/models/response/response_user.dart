@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-ResponseUser responseUserFromJson(String str) => ResponseUser.fromJson(json.decode(str));
+ResponseUser responseUserFromJson(String str) =>
+    ResponseUser.fromJson(json.decode(str));
 
 String responseUserToJson(ResponseUser data) => json.encode(data.toJson());
 
 class ResponseUser {
-
   bool resp;
   String message;
   User user;
@@ -19,18 +19,18 @@ class ResponseUser {
   });
 
   factory ResponseUser.fromJson(Map<String, dynamic> json) => ResponseUser(
-    resp: json["resp"],
-    message: json["message"],
-    user: User.fromJson(json["user"]),
-    // postsUser: PostsUser.fromJson(json["posts"]),
-  );
+        resp: json["resp"],
+        message: json["message"],
+        user: User.fromJson(json["user"]),
+        // postsUser: PostsUser.fromJson(json["posts"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "resp": resp,
-    "message": message,
-    "user": user.toJson(),
-    // "posts": postsUser.toJson(),
-  };
+        "resp": resp,
+        "message": message,
+        "user": user.toJson(),
+        // "posts": postsUser.toJson(),
+      };
 }
 
 // class PostsUser {
@@ -59,36 +59,33 @@ class ResponseUser {
 // }
 
 class User {
-
-  int user_no;
   String user_id;
   String user_name;
   String user_email;
+  String user_pw;
   // String phone_no;
 
   User({
-    required this.user_no,
     required this.user_id,
     required this.user_name,
     required this.user_email,
+    required this.user_pw,
     // required this.phone_no,
-
   });
 
-
   factory User.fromJson(Map<String, dynamic> json) => User(
-    user_no: json["user_no"] ?? -0,
-    user_id: json["user_id"] ?? '',
-    user_name: json["user_name"] ?? '',
-    user_email: json["user_email"] ?? '',
-    // phone_no: json["phone_no"] ?? '',
-  );
+        user_id: json["user_id"] ?? '',
+        user_name: json["user_name"] ?? '',
+        user_email: json["user_email"] ?? '',
+        user_pw: json["user_pw"] ?? '',
+        // phone_no: json["phone_no"] ?? '',
+      );
 
   Map<String, dynamic> toJson() => {
-    "user_no" : user_no,
-    "user_id": user_id,
-    "user_name" : user_name,
-    "user_email" : user_email,
-    // "phone_no" : phone_no,
-  };
+        "user_id": user_id,
+        "user_name": user_name,
+        "user_email": user_email,
+        "user_pw": user_pw,
+        // "phone_no" : phone_no,
+      };
 }
