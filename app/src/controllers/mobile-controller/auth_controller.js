@@ -14,8 +14,8 @@ exports.login = async function (req, res) {
     try {
         const { userid, password } = req.body;
         const conn = await connect();
-        // Check is exists Email on database 
-        const [verifyUserdb] = await conn.query('SELECT userid, password, email_verified FROM tb_user WHERE userid = ?', [userid]);
+        // Check is exists ID on database 
+        const [verifyUserdb] = await conn.query('SELECT user_id, user_pw, email_verified FROM test WHERE user_id = ?', [user_id]);
         if (verifyUserdb.length == 0) {
             return res.status(401).json({
                 resp: false,
@@ -32,13 +32,13 @@ exports.login = async function (req, res) {
             });
         }
         // Check Password
-        if (!await bcrypt.compareSync(password, verifyUser.passwordd)) {
+        if (!await bcrypt.compareSync(user_pw, verifyUser.user_pw)) {
             return res.status(401).json({
                 resp: false,
                 message: '잘못된 비밀번호'
             });
         }
-        const uidPersondb = await conn.query('SELECT userid as uid FROM tb_user WHERE userid = ?', [userid]); //
+        const uidPersondb = await conn.query('SELECT user_id as uid FROM test WHERE user_id = ?', [user_id]); //
         const { uid } = uidPersondb[0][0]; //
         let token = generateJsonWebToken(uid);
         conn.end();
@@ -74,7 +74,7 @@ exports.renweLogin = async function (req, res) {
 exports.resendCodeEmail = async function (email) {
     const conn = await connect();
     var randomNumber = Math.floor(10000 + Math.random() * 90000);
-    await conn.query('UPDATE tb_user SET token_temp = ? WHERE email = ?', [randomNumber, email]);
+    await conn.query('UPDATE test SET token_temp = ? WHERE user_email = ?', [randomNumber, user_email]);
     await sendEmailVerify('확인 코드', email, `<h1> 청소년톡talk </h1><hr> <b>${randomNumber} </b>`);
     conn.end();
 };

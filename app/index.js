@@ -7,7 +7,7 @@ const main = async() => {
     console.log('hello');
 
     const app = new App();
-    await app.listen(process.env.PORT || '3000');
+    // await app.listen(process.env.PORT || '3000');
 }
 
 main();

@@ -20,7 +20,7 @@ exports.createUser = async function(req, res) {
         const { username, fullname, email, password } = req.body;
         
         const conn = await connect();
-        const [existsEmail] = await conn.query('SELECT email FROM tb_user WHERE email = ?', [email]);
+        const [existsEmail] = await conn.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
         if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
@@ -76,7 +76,7 @@ exports.createUser = async function(req, res) {
 exports.verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
-        const [codedb] = await conn.query('SELECT token_temp FROM tb_user WHERE email = ? LIMIT 1', [req.params.email]);
+        const [codedb] = await conn.query('SELECT token_temp FROM test WHERE user_email = ? LIMIT 1', [req.params.user_email]);
         const { token_temp } = codedb[0];
         if (req.params.code != token_temp) {
             return res.status(401).json({
@@ -84,7 +84,7 @@ exports.verifyEmail = async function (req, res) {
                 message: '확인 실패'
             });
         }
-        await conn.query('UPDATE tb_user SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
+        await conn.query('UPDATE test SET email_verified = ?, token_temp = ? WHERE user_email = ?', [true, '', req.params.user_email]);
         conn.end();
         return res.json({
             resp: true,
@@ -171,7 +171,7 @@ exports.changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
-        const passdb = await conn.query('SELECT passwordd FROM tb_user WHERE userid = ?', [req.idPerson]);
+        const passdb = await conn.query('SELECT user_pw FROM test WHERE user_id = ?', [req.idPerson]);
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -180,7 +180,7 @@ exports.changePassword = async function(req, res) {
         }
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
-        await conn.query('UPDATE tb_user SET passwordd = ? WHERE userid = ?', [newPass, req.idPerson]);
+        await conn.query('UPDATE test SET user_pw = ? WHERE userid = ?', [newPass, req.idPerson]);
         conn.end();
         return res.json({
             resp: true,
