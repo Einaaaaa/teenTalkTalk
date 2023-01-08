@@ -57,18 +57,19 @@ app.use(passport.session());
 initPassport();
 app.use(flash());
 
-app.apiRoutes = {
-    user : '/api',
-    auth : '/api',
-}
-app.use(app.apiRoutes.user, routeUser);
-app.use(app.apiRoutes.auth, routeAuth);
+// app.apiRoutes = {
+//     user : '/api',
+//     auth : '/api',
+// }
+// app.use(app.apiRoutes.user, routeUser);
+// app.use(app.apiRoutes.auth, routeAuth);
 
 app.use(express.static(`${__dirname}/src/public`)); //정적파일 경로
 app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 app.use("/admin",routerAdmin);
-//app.use("/mobile",routeUser); 
+app.use("/mobile",routeUser);
+app.use("/mobile",routeAuth); 
 
 
 // mobile - middleware

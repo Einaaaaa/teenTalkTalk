@@ -31,8 +31,8 @@ class UserServices {
     }, body: {
       'user_id': user_id,
       'user_name': user_name,
-      'email': user_email,
-      'password': user_pw
+      'user_email': user_email,
+      'user_pw': user_pw
     });
     print(resp.headers);
     print(resp.body);
