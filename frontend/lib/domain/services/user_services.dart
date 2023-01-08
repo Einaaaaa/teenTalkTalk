@@ -23,6 +23,8 @@ class UserServices {
 
   Future<DefaultResponse> createdUser(String user_id, String user_name,
       String user_email, String user_pw) async {
+    print('createdUser');
+    print('${Environment.urlApi}/user');
     final resp =
         await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
       'Accept': 'application/json'
@@ -32,7 +34,6 @@ class UserServices {
       'email': user_email,
       'password': user_pw
     });
-    print('${Environment.urlApi}/user');
     print(resp.headers);
     print(resp.body);
 

@@ -61,10 +61,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       if (resp.resp) {
         emit(SuccessUserState());
-        print('success');
       } else {
         emit(FailureUserState(resp.message));
-        print('falure');
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));

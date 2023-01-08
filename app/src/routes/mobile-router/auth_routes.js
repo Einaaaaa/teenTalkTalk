@@ -8,7 +8,7 @@ const verifyToken = require('../../middleware/verify_token');
 router.post('/auth-login', auth.login);
 router.get('/auth/renew-login', verifyToken, auth.renweLogin);
 
-router.get('/hello', async function(req, res){
+router.get('/auth', async function(req, res){
     try{
     res.send('hello route-Auth');
     console.log('route-auth');

@@ -15,36 +15,61 @@ const sendEmailVerify = require('../../lib/nodemailer');
 
 
 // const createUser = async (req, res) => {
-exports.createUser = async function(req, res) {
-    try {
-        const { username, fullname, email, password } = req.body;
+// exports.createUser = async function(req, res) {
+//     try {
+//         const { user_id, user_name, user_email, user_pw } = req.body;
         
-        const conn = await connect();
-        const [existsEmail] = await conn.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
-        if (existsEmail.length > 0) {
-            return res.status(401).json({
-                resp: false,
-                message: '메일이 이미 존재합니다!'
-            });
+//         const conn = await connect();
+//         const [existsEmail] = await conn.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
+//         if (existsEmail.length > 0) {
+//             return res.status(401).json({
+//                 resp: false,
+//                 message: '메일이 이미 존재합니다!'
+//             });
+//         }
+//         let salt = bcrypt.genSaltSync();
+//         const pass = bcrypt.hashSync(password, salt);
+//         var randomNumber = Math.floor(10000 + Math.random() * 90000);
+//         await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
+//         await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
+//         conn.end();
+//         return res.json({
+//             resp: true,
+//             message: '성공적으로 등록된 사용자'
+//         });
+//     }
+//     catch (err) {
+//         return res.status(500).json({
+//             resp: false,
+//             message: err
+//         });
+//     }
+// };
+
+exports.createUser = async(req, res) => {
+    const conn = await connect();
+    const sql = 'insert into test set ?';
+    const body = req.body;
+
+
+    let currentPassword = body.user_pw;
+    const encryptedPW = bcrypt.hashSync(currentPassword, 10)
+
+    const param = {
+        user_id : body.user_id,
+        user_pw : encryptedPW,
+        user_name : body.user_name,
+        user_email : body.user_email
+    }
+
+    conn.query(sql, param, (err, rows, fields) => {
+        if(err){
+            res.status(400).send({msg:"err", content:err});
+        }else{
+            res.status(200).send({msg:"success", param:param});
         }
-        // let salt = bcrypt.genSaltSync();
-        // const pass = bcrypt.hashSync(password, salt);
-        // var randomNumber = Math.floor(10000 + Math.random() * 90000);
-        // await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
-        // await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
-        conn.end();
-        return res.json({
-            resp: true,
-            message: '성공적으로 등록된 사용자'
-        });
-    }
-    catch (err) {
-        return res.status(500).json({
-            resp: false,
-            message: err
-        });
-    }
-};
+    });
+}
 
 exports.getUserById = async function (req, res) {
     try {

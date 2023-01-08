@@ -24,7 +24,7 @@ router.put('/user/change-password', verifyToken, user.changePassword);
 // router.get('/user/get-all-followers', verifyToken, user.getAllFollowers);
 // router.delete('/user/delete-followers/:idUser', verifyToken, user.deleteFollowers);
 // export default router;
-router.get('/hello', async function(req, res){
+router.get('/user', async function(req, res){
     try{
     res.send('hello route-User');
     console.log('route-user');

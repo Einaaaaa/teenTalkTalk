@@ -18,6 +18,19 @@ const passport = require('passport');
 const flash = require('express-flash');
 const initPassport = require('./src/utils/passport');
 
+
+
+// test
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`APP : SERVER RUN ON PORT ${port}`)
+})
+
+app.get('/welcome', (req, res)=>{
+  res.send('heehee');
+})
+
 //라우팅
 const routeUser = require('./src/routes/mobile-router/user_routes');
 const routeAuth = require('./src/routes/mobile-router/auth_routes');
@@ -45,8 +58,8 @@ initPassport();
 app.use(flash());
 
 app.apiRoutes = {
-    user : '/apiUser',
-    auth : '/apiAuth',
+    user : '/api',
+    auth : '/api',
 }
 app.use(app.apiRoutes.user, routeUser);
 app.use(app.apiRoutes.auth, routeAuth);
@@ -64,19 +77,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-// test
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
-app.get('/', (req, res)=>{
-    res.send('heehee');
-})
+
+
+
 
 //=========
 
 
-module .exports = app;
+module.exports = app;
 
 
 
