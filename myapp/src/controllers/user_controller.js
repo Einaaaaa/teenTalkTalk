@@ -20,7 +20,7 @@ const sendEmailVerify = require('../lib/nodemailer');
         const { username, fullname, email, password } = req.body;
         
         const conn = await connect();
-        const [existsEmail] = await conn.query('SELECT email FROM tb_user WHERE email = ?', [email]);
+        const [existsEmail] = await conn.query('SELECT user_email FROM test WHERE user_email = ?', [email]);
         if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
@@ -28,10 +28,11 @@ const sendEmailVerify = require('../lib/nodemailer');
             });
         }
         let salt = bcrypt.genSaltSync();
-        const pass = bcrypt.hashSync(password, salt);
+        const pass = bcrypt.hashSync(user_pw, salt);
         var randomNumber = Math.floor(10000 + Math.random() * 90000);
-        await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
-        await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
+        console.log('before call sp_register');
+        await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), user_id, user_name, user_email, pass, uuidv4(), randomNumber]);
+        await sendEmailVerify('확인 코드', user_email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
         conn.end();
         return res.json({
             resp: true,
@@ -51,19 +52,19 @@ const getUserById = async function (req, res) {
     try {
         const conn = await connect();
         const [userdb] = await conn.query(`CALL SP_GET_USER_BY_ID(?);`, [req.idPerson]);
-        const posters = await conn.query('  SELECT COUNT(person_uid) AS posters FROM posts WHERE person_uid = ?', [req.idPerson]);
-        const friends = await conn.query('SELECT COUNT(person_uid) AS friends FROM friends WHERE person_uid = ?', [req.idPerson]);
-        const followers = await conn.query('SELECT COUNT(person_uid) AS followers FROM followers WHERE person_uid = ?', [req.idPerson]);
+        // const posters = await conn.query('  SELECT COUNT(person_uid) AS posters FROM posts WHERE person_uid = ?', [req.idPerson]);
+        // const friends = await conn.query('SELECT COUNT(person_uid) AS friends FROM friends WHERE person_uid = ?', [req.idPerson]);
+        // const followers = await conn.query('SELECT COUNT(person_uid) AS followers FROM followers WHERE person_uid = ?', [req.idPerson]);
         conn.end();
         return res.json({
             resp: true,
             message: 'Get User by id',
             user: userdb[0][0],
-            posts: {
-                'posters': posters[0][0].posters,
-                'friends': friends[0][0].friends,
-                'followers': followers[0][0].followers
-            },
+            // posts: {
+            //     'posters': posters[0][0].posters,
+            //     'friends': friends[0][0].friends,
+            //     'followers': followers[0][0].followers
+            // },
         });
     }
     catch (err) {
@@ -76,7 +77,7 @@ const getUserById = async function (req, res) {
 const verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
-        const [codedb] = await conn.query('SELECT token_temp FROM users WHERE email = ? LIMIT 1', [req.params.email]);
+        const [codedb] = await conn.query('SELECT token_temp FROM test WHERE user_email = ? LIMIT 1', [req.params.user_email]);
         const { token_temp } = codedb[0];
         if (req.params.code != token_temp) {
             return res.status(401).json({
@@ -84,7 +85,7 @@ const verifyEmail = async function (req, res) {
                 message: '확인 실패'
             });
         }
-        await conn.query('UPDATE users SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
+        await conn.query('UPDATE test SET email_verified = ?, token_temp = ? WHERE user_email = ?', [true, '', req.params.user_email]);
         conn.end();
         return res.json({
             resp: true,
@@ -171,7 +172,7 @@ const changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
-        const passdb = await conn.query('SELECT passwordd FROM users WHERE person_uid = ?', [req.idPerson]);
+        const passdb = await conn.query('SELECT user_pw FROM test WHERE user_id = ?', [req.idPerson]);
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -180,7 +181,7 @@ const changePassword = async function(req, res) {
         }
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
-        await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [newPass, req.idPerson]);
+        await conn.query('UPDATE test SET user_pw = ? WHERE user_id = ?', [newPass, req.idPerson]);
         conn.end();
         return res.json({
             resp: true,

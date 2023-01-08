@@ -33,6 +33,7 @@ class UserServices {
       'password': user_pw
     });
     print('${Environment.urlApi}/user');
+    print(resp.headers);
     print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
@@ -50,6 +51,7 @@ class UserServices {
 
   Future<DefaultResponse> verifyEmail(String user_email, String code) async {
     final resp = await http.get(
+        // ignore: prefer_interpolation_to_compose_strings
         Uri.parse('${Environment.urlApi}/user/verify-email/' +
             code +
             '/' +

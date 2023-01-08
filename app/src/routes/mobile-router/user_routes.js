@@ -7,7 +7,7 @@ const verifyToken = require('../../middleware/verify_token');
 // import { uploadsCover, uploadsProfile } from '../lib/multer';
 
 router.post('/user', user.createUser);
-// router.get('/user/get-User-By-Id', verifyToken, user.getUserById);
+router.get('/user/get-User-By-Id', verifyToken, user.getUserById);
 router.get('/user/verify-email/:code/:email', user.verifyEmail);
 // Middleware [ Token, image ]  - Profile Image required
 // router.put('/user/update-cover', [verifyToken, uploadsCover.single('cover')], user.updatePictureCover);
@@ -27,7 +27,7 @@ router.put('/user/change-password', verifyToken, user.changePassword);
 router.get('/hello', async function(req, res){
     try{
     res.send('hello route-User');
-    console.log('1');
+    console.log('route-user');
     } catch(err){
         console.log(err);
     }

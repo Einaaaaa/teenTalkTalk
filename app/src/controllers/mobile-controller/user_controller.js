@@ -46,24 +46,23 @@ exports.createUser = async function(req, res) {
     }
 };
 
-
-export const getUserById = async (req, res) => {
+exports.getUserById = async function (req, res) {
     try {
         const conn = await connect();
         const [userdb] = await conn.query(`CALL SP_GET_USER_BY_ID(?);`, [req.idPerson]);
-        const posters = await conn.query('  SELECT COUNT(person_uid) AS posters FROM posts WHERE person_uid = ?', [req.idPerson]);
-        const friends = await conn.query('SELECT COUNT(person_uid) AS friends FROM friends WHERE person_uid = ?', [req.idPerson]);
-        const followers = await conn.query('SELECT COUNT(person_uid) AS followers FROM followers WHERE person_uid = ?', [req.idPerson]);
+        // const posters = await conn.query('  SELECT COUNT(person_uid) AS posters FROM posts WHERE person_uid = ?', [req.idPerson]);
+        // const friends = await conn.query('SELECT COUNT(person_uid) AS friends FROM friends WHERE person_uid = ?', [req.idPerson]);
+        // const followers = await conn.query('SELECT COUNT(person_uid) AS followers FROM followers WHERE person_uid = ?', [req.idPerson]);
         conn.end();
         return res.json({
             resp: true,
             message: 'Get User by id',
             user: userdb[0][0],
-            posts: {
-                'posters': posters[0][0].posters,
-                'friends': friends[0][0].friends,
-                'followers': followers[0][0].followers
-            },
+            // posts: {
+            //     'posters': posters[0][0].posters,
+            //     'friends': friends[0][0].friends,
+            //     'followers': followers[0][0].followers
+            // },
         });
     }
     catch (err) {

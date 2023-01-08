@@ -22,7 +22,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState()) {
     on<OnGetUserAuthenticationEvent>(_onGetUserAuthentication);
     on<OnRegisterUserEvent>(_onRegisterUser);
-    on<OnVerifyEmailEvent>( _onVerifyEmail );
+    on<OnVerifyEmailEvent>(_onVerifyEmail);
     // on<OnUpdatePictureCover>( _onUpdatePictureCover );
     // on<OnUpdatePictureProfile>( _onUpdatePictureProfile );
     // on<OnUpdateProfileEvent>( _onUpdateProfile );
@@ -53,12 +53,32 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingUserState());
 
       await Future.delayed(const Duration(milliseconds: 550));
-      print("_onRegisterUser");
+      print("_onRegisterUser!!!");
       final resp = await userService.createdUser(
           event.user_id, event.user_name, event.user_email, event.user_pw);
-      print(resp);
-      print(resp);
-      print(resp.resp);
+
+      // print(resp.resp);
+
+      if (resp.resp) {
+        emit(SuccessUserState());
+        print('success');
+      } else {
+        emit(FailureUserState(resp.message));
+        print('falure');
+      }
+    } catch (e) {
+      emit(FailureUserState(e.toString()));
+    }
+  }
+
+  Future<void> _onVerifyEmail(
+      OnVerifyEmailEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(LoadingUserState());
+
+      final resp = await userService.verifyEmail(event.user_email, event.code);
+
+      await Future.delayed(const Duration(milliseconds: 350));
 
       if (resp.resp) {
         emit(SuccessUserState());
@@ -68,28 +88,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } catch (e) {
       emit(FailureUserState(e.toString()));
     }
-  }
-
-  Future<void> _onVerifyEmail( OnVerifyEmailEvent event, Emitter<UserState> emit ) async {
-
-    try {
-
-      emit( LoadingUserState() );
-
-      final resp = await userService.verifyEmail(event.user_email, event.code);
-
-      await Future.delayed(const Duration(milliseconds: 350));
-
-      if( resp.resp ){
-        emit( SuccessUserState() );
-      } else {
-        emit( FailureUserState(resp.message) );
-      }
-
-    } catch (e) {
-      emit( FailureUserState(e.toString()) );
-    }
-
   }
 
   // Future<void> _onUpdatePictureCover( OnUpdatePictureCover event, Emitter<UserState> emit ) async {

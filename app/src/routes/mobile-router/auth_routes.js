@@ -11,7 +11,7 @@ router.get('/auth/renew-login', verifyToken, auth.renweLogin);
 router.get('/hello', async function(req, res){
     try{
     res.send('hello route-Auth');
-    console.log('1');
+    console.log('route-auth');
     } catch(err){
         console.log(err);
     }

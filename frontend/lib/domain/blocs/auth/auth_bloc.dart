@@ -19,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
+      print("on Loing Event");
       emit(LoadingAuthentication());
 
       final data = await authServices.login(event.user_id, event.user_pw);
@@ -44,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
+      print("_onCheckingLogin!!");
       await Future.delayed(const Duration(milliseconds: 850));
 
       if (await secureStorage.readToken() != null) {
