@@ -66,7 +66,8 @@ try{
   json.msg = "로그인 실패";
   json.data = {};
   return json;
-} finally {
+} 
+finally {
   if(db) db.end(
     function(err) {
       if (err) {

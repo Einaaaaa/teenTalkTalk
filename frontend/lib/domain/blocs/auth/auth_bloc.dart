@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
-      print("on Loing Event");
+      print("on Login Event");
       emit(LoadingAuthentication());
 
       final data = await authServices.login(event.user_id, event.user_pw);

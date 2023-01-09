@@ -25,16 +25,17 @@ class UserServices {
     print('createdUser');
     print('${Environment.urlApi}/user');
 
-    final resp =
-        await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
-      'Accept': 'application/json'
-    }, body: {
-      'user_id': userID,
-      'user_pw': userPW,
-      'user_email': userEmail,
-      'user_name': userName,
-    });
-    print('resp.body print' + resp.body);
+    final resp = await http.post(Uri.parse('${Environment.urlApi}/signup'),
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: {
+          'userid': userID,
+          'password': userPW,
+          'user_email': userEmail,
+          'name': userName
+        });
+    print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
