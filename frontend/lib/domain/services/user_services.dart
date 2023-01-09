@@ -34,9 +34,28 @@ class UserServices {
       'user_email': userEmail,
       'user_name': userName,
     });
-    print(resp);
+    print('resp.body print' + resp.body);
+
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
+
+  // Future<dynamic> createdUser(
+  //     String userID, String userPW, String userEmail, String userName) async {
+  //   // var url = Uri.parse('http://localhost:3000/get');
+  //   final resp =
+  //       await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
+  //     'Accept': 'application/json'
+  //   }, body: {
+  //     'user_id': userID,
+  //     'user_pw': userPW,
+  //     'user_email': userEmail,
+  //     'user_name': userName,
+  //   });
+  //   print('resp.body : ' + resp.body);
+  //   var userJson = resp.body;
+  //   var parsingData = jsonDecode(userJson);
+  //   return parsingData;
+  // }
 
   Future<ResponseUser> getUserById() async {
     final token = await secureStorage.readToken();

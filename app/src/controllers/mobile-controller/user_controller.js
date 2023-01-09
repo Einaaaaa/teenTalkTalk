@@ -22,7 +22,9 @@ exports.createUser = async function(req, res) {
         // const conn = await connect();
         //conn.query -> connect.query 변경
         console.log('user_controller.js - createUser');
-        const [existsEmail] = await connect.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
+        console.log(req.body);
+        const [existsEmail] = await connect.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]); //실행 안됨
+        console.log('user_controller.js - existsEmail');
         if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
@@ -43,7 +45,7 @@ exports.createUser = async function(req, res) {
     catch (err) {
         return res.status(500).json({
             resp: false,
-            message: err
+            message: 'tmxmfld'
         });
     }
 };
