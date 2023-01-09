@@ -17,10 +17,12 @@ const sendEmailVerify = require('../../lib/nodemailer');
 // const createUser = async (req, res) => {}
 exports.createUser = async function(req, res) {
     try {
-        const { user_id, user_name, user_email, user_pw } = req.body;
+        const { user_id, user_pw, user_email, user_name} = req.body;
         
-        const conn = await connect();
-        const [existsEmail] = await conn.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
+        // const conn = await connect();
+        //conn.query -> connect.query 변경
+        console.log('user_controller.js - createUser');
+        const [existsEmail] = await connect.query('SELECT user_email FROM test WHERE user_email = ?', [user_email]);
         if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
@@ -28,9 +30,9 @@ exports.createUser = async function(req, res) {
             });
         }
         let salt = bcrypt.genSaltSync();
-        const pass = bcrypt.hashSync(password, salt);
+        const pass = bcrypt.hashSync(user_pw, salt);
         var randomNumber = Math.floor(10000 + Math.random() * 90000);
-        await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
+        await connect.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), user_id, user_name, user_email, pass, uuidv4(), randomNumber]);
         await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
         conn.end();
         return res.json({

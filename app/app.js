@@ -8,8 +8,9 @@ const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const {promisfy} = require('promisfy');
+const {createServer} = require('http');
 
-// dotenv.config();
+dotenv.config();
 
 const app = express();
 app.use(express.static('public'));
@@ -21,23 +22,49 @@ const initPassport = require('./src/utils/passport');
 
 
 // test
-// const port = 3000;
+const port = 3000;
 
-// app.listen(port, () => {
-//   console.log(`APP : SERVER RUN ON PORT ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`APP : SERVER RUN ON PORT ${port}`)
+})
 
-app.httpServer = createServer(this.app);
+// app.httpServer = createServer(app);
 
-// app.listen(port: string) Promise<void> {
-
-//   await app.httpServer.listen( port );
-//   console.log(`SERVER RUN ON PORT ${ port }`)
+// app.listen = async function(port) {
+//   console.log('SERVER RUN ON PORT ${port}')
+//   await app.httpServer.listen(port);
+  
 // }
+
 
 app.get('/welcome', (req, res)=>{
   res.send('heehee');
 })
+
+
+// webdb - test에서 data select
+// const pool = require('./src/utils/kth.connection');
+
+// app.get('/get', function(req, res){
+//   var sql = 'select * from test';
+//   pool.query(sql, function(err, id, fields){
+//     var user_id = req.id;
+//     console.log('id', id);
+//     console.log('fields', fields);
+//     if(id){
+//       var sql = 'select * from test'
+//       pool.query(sql, function(err, id, fields){
+//         if(err){
+//           console.log(err);
+//         } else {
+//           res.json(id);
+//           console.log('user : ' , user_id);
+//           console.log('user: ', fields);
+//         }
+//       })
+//     }
+//   })
+// })
 
 //라우팅
 const routeUser = require('./src/routes/mobile-router/user_routes');
@@ -83,7 +110,7 @@ app.use("/mobile",routeAuth);
 // mobile - middleware
 app.use(cors);
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+// app.use(express.urlencoded({extended:false}));
 
 
 

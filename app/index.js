@@ -1,14 +1,14 @@
-const App = require('./app');
-const config = require('dotenv');
+// const App = require('./app');
+// const config = require('dotenv');
 
-const main = async() => {
+// const main = async() => {
 
-    config.config();
-    console.log('hello');
+//     config.config();
+//     console.log('hello');
 
-    const app = new App();
-    console.log('hello222');
-    await app.listen(process.env.PORT || '3000');
-}
+//     const app = new App();
+//     console.log('hello222');
+//     await app.listen(process.env.PORT || '3000');
+// }
 
-main();
+// main();

@@ -7,6 +7,7 @@ import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:login/ui/screens/home/home_test.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,14 +63,15 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 const SizedBox(height: 30.0),
-                // BtnNaru(
-                //   text: '마이페이지',
-                //   backgroundColor: ThemeColors.secondary,
-                //   colorText: Colors.white,
-                //   width: size.width,
-                //   onPressed: () =>
-                //       Navigator.push(context, routeSlide(page: MyView())),
-                // ),
+                BtnNaru(
+                  text: 'Database connect test',
+                  backgroundColor: ThemeColors.secondary,
+                  colorText: Colors.white,
+                  width: size.width,
+                  onPressed: () =>
+                      Navigator.push(context, routeSlide(page: MyView())),
+                ),
+                const SizedBox(height: 50.0),
               ],
             ),
           ),

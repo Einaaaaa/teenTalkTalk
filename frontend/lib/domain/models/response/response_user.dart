@@ -77,13 +77,23 @@ class User {
     // required this.phone_no,
   });
 
+  // factory User.fromJson(Map<String, dynamic> json) => User(
+  //       userID: json["user_id"] ?? '',
+  //       userName: json["user_name"] ?? '',
+  //       userEmail: json["user_email"] ?? '',
+  //       userPW: json["user_pw"] ?? '',
+  //       tokenTemp: json["token_temp"] ?? '',
+  //       emailVerified: json["email_verified"] ?? -0,
+  //       // phone_no: json["phone_no"] ?? '',
+  //     );
+
   factory User.fromJson(Map<String, dynamic> json) => User(
-        userID: json["user_id"] ?? '',
-        userName: json["user_name"] ?? '',
-        userEmail: json["user_email"] ?? '',
-        userPW: json["user_pw"] ?? '',
-        tokenTemp: json["token_temp"] ?? '',
-        emailVerified: json["email_verified"] ?? -0,
+        userID: json["user_id"],
+        userName: json["user_name"],
+        userEmail: json["user_email"],
+        userPW: json["user_pw"],
+        tokenTemp: json["token_temp"],
+        emailVerified: json["email_verified"],
         // phone_no: json["phone_no"] ?? '',
       );
 

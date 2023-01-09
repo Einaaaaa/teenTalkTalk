@@ -21,7 +21,7 @@ class UserServices {
   }
 
   Future<DefaultResponse> createdUser(
-      String userID, String userName, String userEmail, String userPW) async {
+      String userID, String userPW, String userEmail, String userName) async {
     print('createdUser');
     print('${Environment.urlApi}/user');
 
@@ -30,11 +30,11 @@ class UserServices {
       'Accept': 'application/json'
     }, body: {
       'user_id': userID,
-      'user_name': userName,
+      'user_pw': userPW,
       'user_email': userEmail,
-      'user_pw': userPW
+      'user_name': userName,
     });
-    print(resp.body);
+    print(resp);
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
