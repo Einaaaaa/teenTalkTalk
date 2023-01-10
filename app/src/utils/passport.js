@@ -13,8 +13,8 @@ module.exports = () => {
         //console.log('passport username:'+username);
         var conn;
         try{
-            conn = await db.getConnection();
-            const query = 'SELECT userid, password, salt, name FROM webdb.tb_user where userid="'+username+'"';
+          conn = await db.getConnection();
+            const query = 'SELECT userid, password, salt, name, user_type, board_idx FROM webdb.tb_user where userid="'+username+'"';
             var rows = await conn.query(query);
             if (rows.length) {
                 var user = rows[0]; // 적절한 유저정보가 존재하는 경우

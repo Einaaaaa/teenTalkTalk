@@ -9,42 +9,61 @@ exports.SignIn = async function(req) {
 try{
   var json = {};
   json.code = 0;
-  conn = await db.getConnection();
   var userid = req.body.userid;
   var password = req.body.password;
   var query = "SELECT userid, password, salt, name FROM webdb.tb_user where userid='" + userid + "' ;";
-  var rows = await conn.query(query); // 쿼리 실행 
-  if (rows[0]) {
-      //저장된 password 와 hash password 가 같은지를 체크하여 로그은 성공, 실패 처리 
-      var userSalt = rows[0].salt;
-      var userPass = rows[0].password;
-      return new Promise((resolve, reject) => {
+  db.query(query, function(err, results, fields) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(results);
+  });
+  db.query(query, function (err, rows) {
+      if (err) {
+          console.log('login-service SignIn:'+err);
+          json.code = 100;
+          json.msg = "로그인 실패";
+          json.data = {};
+          return json;
+      }
+      if (rows[0]) {
+          var userSalt = rows[0].salt;
+          var userPass = rows[0].password;
           hasher({
               password: password,
               salt: userSalt
           }, (err, pass, salt, hash) => {
               if (hash != userPass) {
                   json.code = 100;
-                  json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다)";
+                  json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다.)";
                   json.data = {};
               } else {
                   json.data = rows[0];
               }
-              resolve(json);
+              console.log(json.code);
+              return json;
           });
-      });
-  } else {
-      json.code = 100;
-      json.msg = "ID 일치하지 않습니다.";
-      json.data = {};
-      return json;
-  }
+      } else {
+          json.code = 100;
+          json.msg = "존재하지 않는 ID 입니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다.)";
+          json.data = {};
+          return json;
+      }
+  });
 } catch(error) {
   console.log('login-service SignIn:'+error);
+  json.code = 100;
+  json.msg = "로그인 실패";
+  json.data = {};
+  return json;
 } finally {
-  if (conn) conn.end();
-}
-
+  if(db) db.end(
+    function(err) {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );}
 };
 
 // var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
@@ -105,7 +124,7 @@ exports.signUp = async function(req, res) {
   return resultcode;
 }; 
 */
-/*
+
 //로그인 체크
 exports.login_check = async function(req, res) {
   var resultcode = 0;
@@ -142,7 +161,6 @@ exports.date_check = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
-    console.log('date_check');
     conn = await db.getConnection();
     var userid = req.user.userid;
     var query = "SELECT case when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) >= 0 and Timestampdiff(hour, Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
@@ -169,4 +187,3 @@ exports.date_check = async function(req, res) {
     if (conn) conn.end();
   }
 };
-*/
