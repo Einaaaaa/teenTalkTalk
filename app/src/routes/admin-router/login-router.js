@@ -9,37 +9,13 @@ const passport = require('passport');
 // 로그인 라우터
 router.get('/login', function (req, res) {
   try{
-    // console.log('login-router login');
+    //console.log('login-router login');
     res.render('dataif/login');
   } catch(error) {
     console.log('login-router login error:'+error);
   }
 });
 
-
-router.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
-  failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
-  failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
-}));
-
-//이름 변경
-router.get("/loginSuccess", function(req, res) {
-  res.render('dataif/mem'); 
-  // redirect('/admin/login');
-  //res.json({msg:'0'});
-});
-
-router.get("/loginFailure", function(req, res) {
-  var rtnMsg;
-  var err = req.flash('error');
-  if(err) rtnMsg = err;
-  //res.json({success: false, msg: rtnMsg})
-  res.redirect('/admin/auth/login');
-  //res.json({errMsg:msg});
-});
-
-//로그인끝
 
 /*
 router.post("/login", async function(req, res) {
@@ -91,6 +67,29 @@ passport.deserializeUser((userid,done)=>{
 */
 //이게 동작하면 authenticate() 메서드 실행되고 이 값처리는 위의 passport부분에서 실행한다. 
 
+router.post('/login', passport.authenticate('local-login', {
+  successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
+  failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
+  failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
+}));
+
+//이름 변경
+router.get("/loginSuccess", function(req, res) {
+  res.render('dataif/mem'); 
+  // redirect('/admin/login');
+  //res.json({msg:'0'});
+});
+
+router.get("/loginFailure", function(req, res) {
+  var rtnMsg;
+  var err = req.flash('error');
+  if(err) rtnMsg = err;
+  //res.json({success: false, msg: rtnMsg})
+  res.redirect('/admin/auth/login');
+  //res.json({errMsg:msg});
+});
+
+//로그인끝
 
 
 router.post("/login-check", async function(req, res) {
