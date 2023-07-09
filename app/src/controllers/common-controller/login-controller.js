@@ -6,7 +6,6 @@ exports.SignIn = async function(req, res) {
     // console.log('login-controller', req.body);
     const result = await login_service.SignIn(req);
     console.log('login-controller SignIn');
-    console.log(result);
     if (result.code == 0) {
       console.log("login-controller SiginIn 로그인 성공");
       // 로그인 성공시 쿠키 생성

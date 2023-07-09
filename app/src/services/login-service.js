@@ -37,8 +37,8 @@ try{
               salt: userSalt
           }, (err, pass, salt, hash) => {
               if (hash != userPass) {
-                json.code = 100;
-                json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다)";
+                json.code = 200;
+                json.msg = "패스워드가 일치하지 않습니다.";
                 json.data = {};
               } else {
                 // console.log('login-service json.code', json.code);
@@ -48,8 +48,8 @@ try{
           });
       });
   } else {
-      json.code = 100;
-      json.msg = "ID 일치하지 않습니다.";
+      json.code = 300;
+      json.msg = "존재하지 않는 ID입니다.";
       json.data = {};
       return json;
   }

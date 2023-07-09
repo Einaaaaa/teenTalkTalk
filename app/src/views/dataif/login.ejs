@@ -16,12 +16,42 @@
         <input name="password" id="password" type="password" placeholder="비밀번호"/>
         <div>
           <input type="submit" value="로그인" class="btn btn-primary"/>
-          <!-- <input type="button" value="회원가입" class="btn btn-primary" onclick="location.href='/admin/auth/signup'"/> -->
-          <!-- <a href="app.apk" type="application/vnd.android.package-archive" download>다운로드</a> -->
           <a href="/admin/main/filedownload?filename=talk.apk">다운로드</a>
         </div>
       </form>
     </div>
   </div>
+  
+  <script>
+    // 로그인 폼 제출 시
+    document.getElementById('frm_login').addEventListener('submit', function(event) {
+      event.preventDefault(); // 기본 제출 동작 방지
+
+      // 로그인 확인을 위해 서버에 요청
+      fetch('/admin/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userid: document.getElementById('userid').value,
+          password: document.getElementById('password').value
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.code === 0) {
+          // 로그인 성공 시
+          window.location.href = '/admin/dataif';
+        } else {
+          // 로그인 실패 시
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        console.log('로그인 요청 에러:', error);
+      });
+    });
+  </script>
 </body>
 </html>
