@@ -44,7 +44,7 @@ dependencies:
   permission_handler: ^9.2.0
   pin_code_fields: ^7.3.0
   url_launcher: ^6.1.9
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.9
   flutter_screenutil: ^5.7.0
   flutter_local_notifications: ^14.0.0+2
   flutter_neumorphic: ^3.2.0
@@ -157,6 +157,11 @@ flutter:
           weight : 300
         - asset : fonts/CookieRunBold.otf
           weight : 400
+
+    - family : BMJUA
+      fonts :
+        - asset : fonts/BMJUA.otf
+          weight : 300
         
        
   #   - family: Trajan Pro

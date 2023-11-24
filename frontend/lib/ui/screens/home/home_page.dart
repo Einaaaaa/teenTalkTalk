@@ -129,12 +129,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     padding: const EdgeInsets.only(right: 20),
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const LoginPage(),
-                      //     ));
-
                       if (authBloc.state is LogOut) {
                         // 로그인 상태가 아닐 경우 LoginPage로 이동
                         Navigator.push(
@@ -142,11 +136,6 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => const LoginPage()),
                         );
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const NoLoginPage()),
-                        // );
                       } else {
                         // 로그인 상태일 경우 MyPage로 이동
                         Navigator.push(
@@ -171,14 +160,6 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // modal test
-                  // BtnNaru(
-                  //   text: 'test',
-                  //   width: 300,
-                  //   onPressed: () {
-                  //     modalGetFig(context, '6');
-                  //   },
-                  // ),
                   // 배너 슬라이드
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),
@@ -204,32 +185,14 @@ class _HomePageState extends State<HomePage> {
                                 autoPlay: true,
                               ),
                             );
-
-                      // if (!snapshot.hasData) {
-                      //   return Column(
-                      //     children: const [ShimmerNaru(), ShimmerNaru()],
-                      //   );
-                      // } else {
-                      //   return CarouselSlider.builder(
-                      //     itemCount: snapshot.data!.length,
-                      //     itemBuilder: ((context, index, realIndex) =>
-                      //         BannerSlide(
-                      //             policyBanners: snapshot.data![index])),
-                      //     options: CarouselOptions(
-                      //       scrollDirection: Axis.horizontal,
-                      //       height: MediaQuery.of(context).size.height / 4,
-                      //       enlargeCenterPage: true,
-                      //       viewportFraction: 1.0,
-                      //       autoPlay: true,
-                      //     ),
-                      //   );
-                      // }
                     },
                   ),
 
                   SizedBox(
                     height: 15.h,
                   ),
+
+                  // 생애주기별 정책
                   Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -248,20 +211,15 @@ class _HomePageState extends State<HomePage> {
                       child: Column(children: [
                         Row(children: [
                           Icon(
-                            Icons.category,
+                            Icons.auto_graph_rounded,
                             color: ThemeColors.primary,
                             size: 22.w,
                           ),
-                          // ImageIcon(
-                          //   AssetImage("images/icon_check.png"),
-                          //   color: ThemeColors.darkGreen,
-                          //   size: 20,
-                          // ),
                           SizedBox(
                             width: 5.w,
                           ),
                           TextCustom(
-                            text: '카테고리별 정책을 확인하세요!',
+                            text: '생애주기별 영암군 정책을 확인하세요!',
                             color: Colors.black, //ThemeColors.basic,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
@@ -270,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           width: 5.w,
                         ),
-                        // 카테고리 아이콘
+                        // 생애주기별 카테고리 아이콘
                         const CategoryButton(),
                       ])),
                   SizedBox(

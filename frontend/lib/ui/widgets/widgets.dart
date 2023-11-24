@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 
-import 'package:teentalktalk/ui/screens/event/event_page.dart';
+import 'package:teentalktalk/ui/screens/event/event_page_new.dart';
 import 'package:teentalktalk/ui/screens/scrap/scrap.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
 import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';

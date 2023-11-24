@@ -270,7 +270,6 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                       ),
                       TextCustom(
                         text: '$startDate ~ $endDate', //'관내 초등학생',
-
                         color: Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,

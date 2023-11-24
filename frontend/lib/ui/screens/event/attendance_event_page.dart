@@ -15,6 +15,8 @@ class AttendanceEventPage extends StatefulWidget {
 }
 
 class _AttendanceEventPageState extends State<AttendanceEventPage> {
+  static DateTime now = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     EventController controller = EventController();
@@ -44,10 +46,20 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset("images/event_icon/attendance_icon.svg",
-                    color: Colors.white, height: 48.h, width: 48.w),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("images/event_icon/attendance_icon.svg",
+                        color: Colors.white, height: 40.h, width: 40.w),
+                    TextCustom(
+                        text: "${now.month}월",
+                        fontSize: 30.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
+                  ],
+                ),
                 SizedBox(
-                  height: 10.h,
+                  height: 20.h,
                 ),
                 TextCustom(
                     text: "매일 출석체크하고 무화과를 모아요",

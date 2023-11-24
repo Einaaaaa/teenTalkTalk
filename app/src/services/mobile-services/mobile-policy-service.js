@@ -29,29 +29,31 @@ exports.getAllPolicy = async function(req, res) {
 
         var query;
         var sortOrderCode = req.params.sortOrderCode;
+        // console.log(sortOrderCode);
 
         if (sortOrderCode === '0') {
             // 최신순으로 정렬
             query = "SELECT * FROM webdb.tb_policy ORDER BY board_idx DESC;";
         } else if (sortOrderCode === '1') {
-            // 조회수 높은 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY count_views DESC;";
-        } else if (sortOrderCode === '2') {
-           // 조회수 낮은 순으로 정렬
-           query = "SELECT * FROM webdb.tb_policy ORDER BY count_views ASC;";
-        } else if (sortOrderCode === '3') {
-            // 스크랩 수 많은 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps DESC;";
-        } else if (sortOrderCode === '4') {
-            // 스크랩 수 적은 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
-        } else if (sortOrderCode === '5') {
-            // 마감일 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
-        }  
-        else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
             query = "SELECT * FROM webdb.tb_policy ORDER BY board_idx ASC;";
+        } else if (sortOrderCode === '2') {
+           // 스크랩 수 많은 순으로 정렬
+           query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps DESC;";
+        } else if (sortOrderCode === '3') {
+            // 스크랩 수 적은 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
+        } else if (sortOrderCode === '4') {
+            // 마감일 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
+        } else if (sortOrderCode === '5') {
+            
+            // 조회수 높은 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY count_views DESC;";
+        }  
+        else if (sortOrderCode === '6') {
+            // 조회수 낮은 순으로 정렬
+           query = "SELECT * FROM webdb.tb_policy ORDER BY count_views ASC;";
         }  
         else {
             // 기본적으로 등록 순으로 정렬

@@ -107,7 +107,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
   void initState() {
     super.initState();
     policyId = widget.policyId;
-    selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
 
     // 정책 공유 링크를 통해 들어온 경우 해당 정책 정보 불러오기
     if (policyId != null) {
@@ -164,6 +163,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
   Widget build(BuildContext context) {
     // String selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
     // print(_isSelectingCategory);
+
+    selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
 
     final policyInstitution = widget.selectedCodes.policyInstitution;
     final policyTarget = widget.selectedCodes.policyTarget;
@@ -269,6 +270,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                             },
                           );
                         } else {
+                          // print(selectedSortOrderCode);
                           return FutureBuilder<List<Policy>>(
                             future: policyService
                                 .getAllPolicy(selectedSortOrderCode),
@@ -316,7 +318,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
   }
 
   Widget streamSearchPolicy() {
-    print(widget.selectedSortOrder?.name ?? '');
     return StreamBuilder<List<Policy>>(
       stream: policyService.searchProducts,
       builder: (context, snapshot) {
@@ -581,12 +582,12 @@ class _PolicyBarState extends State<PolicyBar> {
 
   final List<policySortOrder> _sortByOptions = [
     policySortOrder(name: '최신순', code: '0'),
-    policySortOrder(name: '조회수높은순', code: '1'),
-    policySortOrder(name: '조회수낮은순', code: '2'),
-    policySortOrder(name: '스크랩많은순', code: '3'),
-    policySortOrder(name: '스크랩적은순', code: '4'),
-    policySortOrder(name: '마감일순', code: '5'),
-    policySortOrder(name: '등록순', code: '6'),
+    policySortOrder(name: '등록순', code: '1'),
+    policySortOrder(name: '스크랩많은순', code: '2'),
+    policySortOrder(name: '스크랩적은순', code: '3'),
+    policySortOrder(name: '마감일순', code: '4'),
+    // policySortOrder(name: '조회수높은순', code: '5'),
+    // policySortOrder(name: '조회수낮은순', code: '6'),
   ];
   // late String _sortOrderCode = '0';
 

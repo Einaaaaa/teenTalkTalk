@@ -15,6 +15,6 @@ class Environment {
   // static const String urlApi = 'http://10.0.2.2:4000/mobile';
 
   // 태희 핸드폰 USB 테더링
-  static const String urlApiServer = 'http://172.21.168.180:4000'; // 태희 android
-  static const String urlApi = 'http://172.21.168.180:4000/mobile';
+  static const String urlApiServer = 'http://192.168.0.87:4000'; // 태희 android
+  static const String urlApi = 'http://192.168.0.87:4000/mobile';
 }
