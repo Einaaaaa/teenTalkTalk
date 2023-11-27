@@ -181,6 +181,7 @@ exports.upload = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service upload db getConnection');
+        console.log(req.body);
         var { name, target, policy_institution_code, min_fund, max_fund, content, application_start_date, application_end_date, 
             policy_field_code, policy_character_code, policy_link } = req.body; 
         if (!name) return 1; 

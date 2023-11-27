@@ -25,7 +25,7 @@ router.post("/login", async function(req, res) {
     var result = await login_controller.SignIn(req, res);
     // result.code 값을 login.ejs로 전달
     if(result.code == 0){
-      res.status(200).send({ message: '로그인에 성공했습니다.', code: result.code });
+      res.status(200).send({ message: '로그인에 성공했습니다.', code: result.code, role : req.session.user.data.user_role });
     } else {
       res.status(result.code).send({ message: result.msg, code: result.code });
     }

@@ -11,11 +11,13 @@ var codeName = require('../../public/js/home/getCodeName');
 const { json } = require("body-parser");
 
 const ensureAuth = require("../../utils/middleware/ensureAuth");
+const accessAuth = require("../../utils/middleware/accessAuth");
 const asyncHandler = require("../../utils/middleware/asyncHandler");
 const e = require("connect-flash");
 
-router.get('/show', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/show', ensureAuth, accessAuth(3), asyncHandler(async function (req, res) {
     var crtpage = 1;
+    console.log(req.url);
     var totalPage = 1;
     var pageSize = 8; //한 페이지에 보여줄 정책 수
     if (req.url.split('/').length == 2){ // 처음 페이지 로딩
@@ -46,7 +48,7 @@ router.get('/show', ensureAuth, asyncHandler(async function (req, res) {
 }, 'policy-router show/ error:'));
 
 // 정책 업로드 페이지
-router.get('/upload', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/upload', ensureAuth, accessAuth(3), asyncHandler(async function (req, res) {
     var code_data = await code_controller.getCodeData(req, res); //코드 데이터 가져오기
     res.render('policy/upload', { //정책 업로드 페이지 렌더링, 코드 데이터 전달
         code_data:code_data
@@ -62,7 +64,7 @@ router.post('/upload', asyncHandler(async function (req, res) {
 }, 'policy-router upload/ error:'));
 
 // 정책 수정 페이지
-router.get('/update/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/update/:id', ensureAuth,accessAuth(3), asyncHandler(async function (req, res) {
     var result = await policy_controller.fetchpolicyByidx(req, res); //정책 데이터 가져오기
     // 접수 기간
     var start_month = result[0].application_start_date.getMonth()+1;
@@ -100,7 +102,7 @@ router.post('/update/:id', asyncHandler(async function (req, res) {
 
 
 // 정책 삭제
-router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/delete/:id', ensureAuth, accessAuth(3),asyncHandler(async function (req, res) {
     var policy_img = await policy_controller.fetchpolicyImgByidx(req, res); //정책 이미지 가져오기
     var result = await policy_controller.deletePolicy(req, res); //정책 삭제
 
@@ -128,11 +130,11 @@ router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
 
 
 // 베너 관리
-router.get('/banner', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/banner', ensureAuth, accessAuth(2), asyncHandler(async function (req, res) {
     var result = await policy_controller.fetchBannerData(req,res);
     res.render('policy/banner', {banner:result});
 }, 'policy-router banner/ error:'));
-router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/banner/delete/:id', ensureAuth,accessAuth(2), asyncHandler(async function (req, res) {
     var banner_img = await policy_controller.fetchBannerImg(req, res);
     var result = await policy_controller.deleteBanner(req, res);
     var imagePath = './src/public/upload/banner/' + banner_img[0].banner_img;
@@ -149,7 +151,7 @@ router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, r
     res.redirect('/admin/policy/banner');
 }, 'policy-router banner delete/ error:'));
 
-router.get('/banner/upload', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/banner/upload', ensureAuth, accessAuth(2), asyncHandler(async function (req, res) {
     res.render('policy/banner-upload');
 }, 'policy-router banner upload/ error:'));
 router.post('/banner/upload', asyncHandler(async function (req, res) {

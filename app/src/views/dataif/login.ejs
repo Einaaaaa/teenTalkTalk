@@ -44,8 +44,14 @@
       .then(response => response.json())
       .then(data => {
         if (data.code === 0) {
-          // 로그인 성공 시
-          window.location.href = '/admin/dataif';
+          
+          if(data.role == 3) {
+            //정책관리자
+            window.location.href = '/admin/policy/show';
+          } else {
+            // 로그인 성공 시
+            window.location.href = '/admin/dataif';
+          }
         } else {
           // 로그인 실패 시
           alert(data.message);

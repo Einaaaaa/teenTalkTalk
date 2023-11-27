@@ -132,16 +132,38 @@
           </div>
         </div>
       </div>
+      
+      <textarea name="content" id="editor"></textarea>
       <div class="form-row">
         <div class="label-field">정책 사진</div>
           <div class="file-container">
             <input type="file" name="imgFile" id="imgFile" accept="image/*">
           </div>
       </div>
-      <input type="hidden" name="content" id="content">
-      <div class="ui form">        
-        <textarea id="editor"></textarea>
-      </div>
+      <script>
+        // 3. CKEditor5를 생성할 textarea 지정
+        // db에 저장된 데이터를 가져와서 textarea에 넣는다.
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), {
+              language: "ko",
+              simpleUpload: {
+                uploadUrl: '/upload/image',
+                withCredentials: true,
+              }
+              // plugins: [ 'Essentials', 'Paragraph', 'Bold', 'Italic', 'Link' ]
+            } )
+            // textarea에 db에 저장된 내용을 불러온다.
+            .then( editor => {
+                const content = "내용을 입력해 주세요";
+                const parser = new DOMParser();
+                const decodedContent = parser.parseFromString(`<!doctype html><body>${content}`, 'text/html').body.textContent;
+                editor.setData( decodedContent );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+        </script>
+      
         <!-- <div class="field">
           <label>정책 파일</label>
           <input type="file" name="file">
@@ -161,7 +183,6 @@
                 if (!confirm("취소 하시겠습니까??")) {
                     return false;
                 } else {
-                  alert("취소 하였습니다.");
                   location.href='/admin/policy/show';
                 }
             }
@@ -175,32 +196,6 @@
 </section>
 <script>
   // 모바일에서 파일 업로드를 위한 코드
-  ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-      // 에디터 설정
-      autoGrow: false,
-      dataProcessor: {
-        htmlOutputProcessor: {
-          // 데이터 처리 방식 설정
-          encoding: 'utf-8',
-          entities: false,
-          indent: true,
-          indentOffset: 2
-        }
-      }
-    } )
-    .then( editor => {
-      // 에디터가 준비되면 이벤트 리스너를 등록
-      editor.model.document.on( 'change:data', () => {
-        // 에디터 내용이 변경되었을 때 실행되는 콜백 함수
-        var editorData = editor.getData();
-        document.getElementById("content").value = editorData;
-      } );
-    } )
-    .catch( error => {
-      console.error( error );
-    } );
-
   function btn(){
       if (!confirm("정책 등록 하시겠습니까??")) {
           alert("취소 하였습니다.");

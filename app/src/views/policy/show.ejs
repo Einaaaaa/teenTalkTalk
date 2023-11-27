@@ -65,7 +65,7 @@
     <div id="policy_paging">
       <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
       <div class="ui pagination menu">        
-          <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
+          <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>"></a>
         <% var startPage = Math.max(page - 1, 1); %>
         <% var endPage = Math.min(page + 1, totalPage); %>
         <% if (startPage === 1) { %>
@@ -81,7 +81,7 @@
             <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
           <% } %>
         <% } %>
-          <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
+          <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>"></a>
       </div>
       <% } %>
     </div>

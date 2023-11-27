@@ -100,6 +100,7 @@
 
 .menu-item {
   padding-left: 10px; /* 글자들을 왼쪽으로 10px 띄움 */
+  padding-bottom: 8px;
 }
 
 

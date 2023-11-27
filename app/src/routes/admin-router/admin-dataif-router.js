@@ -12,13 +12,14 @@ var code_controller = require("../../controllers/common-controller/codeData-cont
 
 const ensureAuth = require("../../utils/middleware/ensureAuth");
 const asyncHandler = require("../../utils/middleware/asyncHandler");
+const accessAuth = require("../../utils/middleware/accessAuth");
 
 var codeName = require('../../public/js/home/getCodeName');
 
 const passport = require('passport');
 
 //로그인 시 출력하는 화면
-router.get('/', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/', ensureAuth, accessAuth(2), asyncHandler(async function (req, res) {
   var urltype = req.url.split('/')[1].split('=')[0];
   var crtpage = 1;
   var totalPage = 1;
@@ -59,7 +60,7 @@ router.get('/', ensureAuth, asyncHandler(async function (req, res) {
 
 
 // 무화과 사용 로그 확인 페이지
-router.get('/figManage/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/figManage/:id', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
   var id = req.params.id; //회원 아이디
   var figUsage = await dataif_controller.fetchFigUsageByUid(req, res); //무화과 사용 로그
   var eventPart = await dataif_controller.fetchEventPartByUid(req, res); //행사 참여 로그
@@ -79,7 +80,7 @@ router.post('/', asyncHandler(async function (req, res) {
 
 
 // 약관 설정 페이지
-router.get('/terms', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/terms', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
     var result = await dataif_controller.fetchTermData(req, res);
     res.render('dataif/terms', { posts: result });
 }, 'dataif-router / error:'));
@@ -90,7 +91,7 @@ router.post('/terms', asyncHandler(async function (req, res) {
 
 
 // 회원 정보 수정 페이지
-router.get('/update/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/update/:id', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
     //데이터 받아오기
     var result = await dataif_controller.fetchDataUserUpdate(req, res);
     var code_data = await code_controller.getCodeData(req, res);
@@ -109,13 +110,13 @@ router.post('/update/:id', asyncHandler(async function (req, res) {
 
 
 // 회원 정보 삭제
-router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/delete/:id', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
 }, 'dataif-router delete/ error:'));
 
 // 엑셀 다운로드
-router.get('/excel', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/excel', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
     var result = await dataif_controller.fetchData(req, res); //회원 정보 가져오기
     var xls = json2xls(result); //json 데이터를 엑셀 파일로 변환
     fs.writeFileSync('user_data.xlsx', xls, 'binary'); //엑셀 파일 저장

@@ -17,7 +17,7 @@ CREATE TABLE webdb.`tb_user` (
   `reg_no` varchar(30) NULL,
   `userpw` varchar(255) NOT NULL, -- **password -> userpw 이름 변경 쿼리 : alter table `tb_user` change `password` `userpw` varchar(255) NOT NULL;
   `user_name` varchar(255) NOT NULL, -- **name -> user_name 이름 변경 쿼리 : alter table `tb_user` change `name` `user_name` varchar(255) NOT NULL;
-  `user_role` varchar(1) NULL,  -- 0 : 사용자, 1 : 최고 관리자(root), 2 : 관리자
+  `user_role` varchar(1) NULL,  -- 0 : 사용자, 1 : 최고 관리자(root), 2 : 부관리자, 3 : 정책 관리자
   `user_type` varchar(1) NOT NULL,
   `youthAge_code` varchar(1) NULL,
   `parentsAge_code` varchar(1) NULL,
