@@ -93,7 +93,8 @@ insert into tb_common_code (code,code_name,code_english_name) values('07','기�
 insert into tb_common_code (code,code_name,code_english_name) values('08','분야','policy_field_code');
 insert into tb_common_code (code,code_name,code_english_name) values('09','정책 성격','policy_character_code');
 insert into tb_common_code (code,code_name,code_english_name) values('10','탈퇴 사유','withdrawal_reason_code');
-insert into tb_common_code (code,code_name,code_english_name) values('11','질문 유형','inquiry_type_code'); -- 고객센터 질문 유형 코드 추가
+insert into tb_common_code (code,code_name,code_english_name) values('11','질문 유형','inquiry_type_code');
+insert into tb_common_code (code,code_name,code_english_name) values('12','생애 주기','life_cycle_code'); -- 생애 주기 추가
 
 -- 공통 코드 설계
 create table webdb.`tb_common_code_detail`(
@@ -115,7 +116,9 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('07
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','상담'),('08','02','취업/이직'),('08','03','생활비'),('08','04','건강'),('08','05','주거'),('08','06','결혼/양육'),('08','07','청소년활동'),('08','08','학교밖청소년'),('08','09','돌봄');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('10','00','앱 사용법을 모르겠어요'),('10','01','더이상 쓰지 않는 앱이에요'),('10','02','불편해요'),('10','03','앱 속도가 너무 느려요'),('10','04','보안이 걱정돼요'),('10','05','오류 때문에 쓸 수 없어요'),('10','06','알림이 너무 많아요'),('10','07','기타(텍스트 입력)');
-insert into tb_common_code_detail (code,code_detail,code_detail_name) values('11','00','이용 문의'),('11','01','불편 사항'),('11','02','오류 신고'),('11','03','기타'); -- 고객센터 질문 유형 코드 추가
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('11','00','이용 문의'),('11','01','불편 사항'),('11','02','오류 신고'),('11','03','기타'); 
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('12','00','유아기'),('0126','01','아동/청소년기'),('12','02','청년기'),('12','03','장/노년기'),('12','04','전생애'),('12','05','결혼'),('12','06','임신/출산'),('12','07','귀농/귀촌'); -- 생애 주기 추가
+
 
 
 -- 이용 약관
