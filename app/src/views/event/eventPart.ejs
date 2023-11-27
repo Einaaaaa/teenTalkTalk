@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <%- include('../layout.ejs', { pageTitle: '이벤트 참여자' }) %>
+    <table id="mem_table">
+      <thead>
+        <tr><th>아이디</th>
+        <th>이름</th>
+        <th>거주지</th>
+        <th>사용자 구분</th>
+        <th>가입일</th>
+        <th>무화과</th>
+        <!-- <th>푸시</th>
+        <th>이메일</th>
+        <th>sms</th> -->
+        <th>수정</th>
+        <th>삭제</th>
+      </tr>
+    </thead>
+      <tbody>
+        <% if (posts.length === 0) { %>
+          <tr>
+            <td colspan="10">조회된 데이터가 없습니다.</td>
+          </tr>
+        <% } else { %>
+          <% for(var i=0; i<posts.length; i++){ %>
+            <tr>
+              <td><%= posts[i].userid %></td>
+              <td><%= posts[i].user_name %></td>
+              <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
+              <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
+              <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
+              <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>" style="color: #0000FF; text-decoration: underline;"><%=posts[i].fig%></a></td>
+              <td>
+                <a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a>
+              </td>
+              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
+              <script>
+                function delMem(){
+                  if(confirm("정말 삭제하시겠습니까?")){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                }
+              </script>
+            </tr>
+            <% } %>
+          <% } %>
+      </tbody>
+    </table>
+    <div id="mem_paging">
+      <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
+      <div class="ui pagination menu">
+        <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <% var startPage = Math.max(page - 1, 1); %>
+        <% var endPage = Math.min(page + 1, totalPage); %>
+        <% if (startPage === 1) { %>
+          <% endPage = Math.min(3, totalPage); %>
+        <% } %>
+        <% if (endPage === totalPage) { %>
+          <% startPage = Math.max(endPage - 2, 1); %>
+        <% } %>
+        <% for (var i = startPage; i <= endPage; i++) { %>
+          <% if (i === page) { %>
+            <a class="active item"><%=i %></a>
+          <% } else { %>
+            <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
+          <% } %>
+        <% } %>
+        <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">
+          <i class="fas fa-chevron-right"></i> <!-- Font Awesome 다음 버튼 아이콘 -->
+        </a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

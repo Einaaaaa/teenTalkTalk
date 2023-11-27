@@ -187,8 +187,8 @@ router.get("/participate-event/:uid", async function(req, res){
   try {
     console.log('mobile participate-event');
     var uid = req.params.uid;
-    var result = await mobile_event_controller.participateEvent(req, res); // 0: 참여 실패, 1: 참여 성공
-    if (result == 1) {
+    var result = await mobile_event_controller.participateEvent(req, res); // 0: 참여 성공, 1: 참여 실패, 2: 이미 참여한 이벤트
+    if (result == 0) {
       res.json({
         resp: true,
         message: 'participate event',
@@ -196,7 +196,13 @@ router.get("/participate-event/:uid", async function(req, res){
         openLink: true, // 클라이언트에서 이 값이 true이면 외부 링크 열기
         link: 'https://docs.google.com/forms/d/1jWdwLSUWapjCglekQT9zUvO7XGei57aLSsZYNL9H27w/edit?ts=654c91d5'
       });
-    } else if (result == 0) {
+    } else if (result == 1) {
+      res.json({
+        resp: false,
+        message: '무화과가 부족합니다.',
+        uid : uid
+      });
+    } else if (result == 2) {
       res.json({
         resp: false,
         message: '이미 참여한 이벤트입니다.',
