@@ -27,13 +27,12 @@ CREATE TABLE webdb.`tb_user` (
   `salt` varchar(255) NOT NULL,
   `fig` varchar(4) NOT NULL DEFAULT 0, 
   `token_temp` VARCHAR(100) NULL, -- **사용자 토큰 추가 커리 : alter table `tb_user` add `token_temp` varchar(100) NULL after `fig` ;
+  `event_part` varchar(1) NOT NULL DEFAULT 0, -- **이벤트 참여 여부 컬럼
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   -- PRIMARY KEY (`board_idx`) USING BTREE 
   PRIMARY KEY (`board_idx`, `uid`) USING BTREE
-
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 최고 관리자 id 설정 - 아이디 : admin, 비밀번호 : 1234
 insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');

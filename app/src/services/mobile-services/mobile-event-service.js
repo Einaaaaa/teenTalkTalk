@@ -188,3 +188,28 @@ exports.fetchFigRewardByUser = async function(req, res) {
     if (conn) conn.release();
   }
 };
+
+// 이벤트 참여
+exports.participateEvent = async function(req, res) {
+  var conn;
+  var resultcode = 0; // 0: 참여 실패, 1: 참여 성공
+  try{
+    conn = await db.getConnection();
+    var uid = req.params.uid;
+    // 사용자가 이벤트 참여 이력이 있는 지 확인
+    var query = 'SELECT event_part FROM webdb.tb_user WHERE uid = ?';
+    var event_part = await conn.query(query, [uid]);
+    if(event_part[0].event_part == 0) { // 이벤트 참여 이력 없음
+      // 이벤트 참여
+      var query = 'UPDATE webdb.tb_user SET event_part = 1 WHERE uid = ?';
+      var result = await conn.query(query, [uid]);
+      // console.log(result);
+      resultcode = 1;
+      return resultcode;
+    }
+    // console.log(result);
+    return resultcode;
+  } catch(error) {
+    console.log('mobile-event-service participateEvent:'+error);
+  }
+}
