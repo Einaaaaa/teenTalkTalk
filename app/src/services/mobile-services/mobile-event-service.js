@@ -178,6 +178,7 @@ exports.fetchFigRewardByUser = async function(req, res) {
   try{
     conn = await db.getConnection();
     var uid = req.idPerson;
+    console.log(uid);
     query = 'select event_part_no,acquired_time,event_name,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid+'"'; 
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows);
@@ -195,14 +196,15 @@ exports.participateEvent = async function(req, res) {
   var resultcode = 0; // 0: 참여 성공, 1: 참여 실패, 2: 이미 참여한 이벤트
   try{
     conn = await db.getConnection();
-    var uid = req.params.uid;
+    var uid = req.idPerson;
+    console.log(uid);
     // 사용자가 이벤트 참여 이력이 있는 지 확인
     var query = 'SELECT event_part,fig FROM webdb.tb_user WHERE uid = ?'; //0: 이벤트 참여 이력 없음, 1: 이벤트 참여 이력 있음
     var event_part = await conn.query(query, [uid]);
     if(event_part[0].event_part == 1) { // 이미 이벤트 참여 이력 있음
       resultcode = 2;
       return resultcode;
-    } else if(event_part[0].fig < 30) { // 무화과 30개 미만, 참여 실패
+    } else if(event_part[0].fig < 3) { // 무화과 30개 미만, 참여 실패
       resultcode = 1;
       return resultcode;
     }

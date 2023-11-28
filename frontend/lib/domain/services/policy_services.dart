@@ -81,18 +81,26 @@ class PolicyServices {
   //       .then((_) => timer.cancel());
   // }
 
-  void searchPolicy(String searchValue) async {
+  void searchPolicy(String searchValue, String sortOrderCode) async {
     debouncer.value = "";
     debouncer.onValue = (value) async {
+      print(sortOrderCode);
       final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-search-policy/' + value),
+        Uri.parse(
+            '${Environment.urlApi}/policy/get-search-policy?sortOrderCode=$sortOrderCode&searchValue=$value'),
         headers: _setHeaders(),
       );
 
-      final listPolicies =
-          ResponsePolicy.fromJson(json.decode(resp.body)).policies;
+      // Print the response body for debugging
+      print('Response body: ${resp.body}');
 
-      _streamController.add(listPolicies);
+      try {
+        final listPolicies =
+            ResponsePolicy.fromJson(json.decode(resp.body)).policies;
+        _streamController.add(listPolicies);
+      } catch (e) {
+        print('Error decoding JSON: $e');
+      }
     };
 
     debouncer.value = searchValue; // Update the debouncer value

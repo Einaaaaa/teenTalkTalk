@@ -183,10 +183,11 @@ router.get("/get-fig-history-by-user", verifyToken, async function (req, res) {
 
 
 // 이벤트 참여, 일단 get으로
-router.get("/participate-event/:uid", async function(req, res){
+router.get("/participate-event", verifyToken, async function(req, res){
   try {
     console.log('mobile participate-event');
-    var uid = req.params.uid;
+    var uid = req.idPerson;
+    // console.log('router', uid);
     var result = await mobile_event_controller.participateEvent(req, res); // 0: 참여 성공, 1: 참여 실패, 2: 이미 참여한 이벤트
     if (result == 0) {
       res.json({

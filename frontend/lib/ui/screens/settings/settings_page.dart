@@ -42,31 +42,31 @@ class SettingsPage extends StatelessWidget {
           ),
           body: SafeArea(
             child: Column(children: [
-              Container(
-                padding: const EdgeInsets.all(30),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.notifications_none_rounded,
-                        size: 30.sp,
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      TextCustom(
-                        text: "알림 허용",
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const Spacer(),
-                      const _NotifySwitchButton()
-                    ]),
-              ),
-              Container(
-                height: 2.h,
-                color: Colors.grey[200],
-              ),
+              // Container(
+              //   padding: const EdgeInsets.all(30),
+              //   child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Icon(
+              //           Icons.notifications_none_rounded,
+              //           size: 30.sp,
+              //         ),
+              //         SizedBox(
+              //           width: 5.w,
+              //         ),
+              //         TextCustom(
+              //           text: "알림 허용",
+              //           fontSize: 20.sp,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //         const Spacer(),
+              //         const _NotifySwitchButton()
+              //       ]),
+              // ),
+              // Container(
+              //   height: 2.h,
+              //   color: Colors.grey[200],
+              // ),
               ListTile(
                 contentPadding: const EdgeInsets.only(left: 30, right: 30),
                 title: TextCustom(

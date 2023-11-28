@@ -102,6 +102,19 @@ class EventServices {
 
     return ResponseFigHistory.fromJson(jsonDecode(resp.body));
   }
+
+  // 이벤트 참여여부
+  Future<DefaultResponse> submitFigEventParticipation() async {
+    final token = await secureStorage.readToken();
+
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/event//participate-event'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!});
+    print('submitFigEventParticipation');
+    print(resp.body);
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
 }
 
 final eventService = EventServices();

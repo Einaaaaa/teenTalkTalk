@@ -105,10 +105,10 @@ class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
                             SizedBox(
                               height: 15.h,
                             ),
-                            const _FigMarket(),
-                            SizedBox(
-                              height: 15.h,
-                            ),
+                            // const _FigMarket(),
+                            // SizedBox(
+                            //   height: 15.h,
+                            // ),
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
                               leading: Image.asset(

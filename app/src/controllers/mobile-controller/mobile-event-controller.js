@@ -81,6 +81,8 @@ exports.getAttendance = async function(req, res) {
     }
   };
 
+
+  // 이벤트 참여
   exports.participateEvent = async function(req, res) {
     try{
       var result = await mobile_event_service.participateEvent(req);

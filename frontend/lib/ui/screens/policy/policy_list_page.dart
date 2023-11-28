@@ -208,7 +208,9 @@ class _PolicyListPageState extends State<PolicyListPage> {
               body: SafeArea(
                   child: Column(
                 children: <Widget>[
-                  const SearchBar(), // 검색창
+                  SearchBar(
+                    sortOrderCode: selectedSortOrderCode,
+                  ), // 검색창
                   Visibility(
                     visible: _isSelectingCategory,
                     child: SelectedSearchConditions(
@@ -371,7 +373,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
 // 검색창
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  final String sortOrderCode;
+  const SearchBar({Key? key, required this.sortOrderCode}) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -400,7 +403,7 @@ class _SearchBarState extends State<SearchBar> {
     if (value.isNotEmpty) {
       final policyBloc = BlocProvider.of<PolicyBloc>(context);
       policyBloc.add(OnIsSearchPolicyEvent(true));
-      policyService.searchPolicy(value);
+      policyService.searchPolicy(value, widget.sortOrderCode);
       _myFocusNode.unfocus();
     }
   }

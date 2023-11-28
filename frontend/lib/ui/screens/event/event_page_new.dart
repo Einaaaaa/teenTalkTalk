@@ -378,6 +378,8 @@ class EventPageState extends State<EventPage> {
                         // 30개 이상이면 이벤트 참여 완료되었습니다! modal 띄우고 버튼 텍스트 '참여 완료'로 바꾸기
                         // 30개 미만이면 modal - '무화과를 더 모아주세요'
                         // 참여 완료 상태에서 버튼 누르면 modal - '이미 참여하였습니다. 만족도 조사는 하셨나요? 만족도 조사까지 해야 상품을 받을 수 있어요!' 등
+
+                        eventService.submitFigEventParticipation();
                       } else {
                         // 로그인 X
                         modalCheckLogin(context);
