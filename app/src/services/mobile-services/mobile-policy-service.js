@@ -110,8 +110,9 @@ exports.getSearchPolicy = async function(req, res) {
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnection');
-        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'"; //+ ";"; 
 
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE '%" + searchValue + "%' OR content LIKE '" + searchValue + "'";
+        
         // // // 정렬
         // if (sortOrderCode === '0') {
         //     // 최신순으로 정렬

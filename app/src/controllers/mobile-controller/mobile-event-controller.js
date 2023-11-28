@@ -81,3 +81,12 @@ exports.getAttendance = async function(req, res) {
     }
   };
 
+  exports.participateEvent = async function(req, res) {
+    try{
+      var result = await mobile_event_service.participateEvent(req);
+      return result;
+    } catch(error) {
+      console.log('mobile-event-controller participateEvent:'+error);
+    }
+  }
+

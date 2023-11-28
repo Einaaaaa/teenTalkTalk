@@ -1,4 +1,3 @@
-
 var express = require('express');
 var router = express.Router();
 var mobile_event_controller = require("../../controllers/mobile-controller/mobile-event-controller");
@@ -174,8 +173,6 @@ router.get("/get-fig-history-by-user", verifyToken, async function (req, res) {
       message : 'get fig history by user',
       figReward : figReward, // 무화과 지급 내역
       figUsage : figUsage, // 무화과 사용 내역
-
-
     })
   } catch (error) {
     console.log('mobile-event-router get-fig-history-by-user error:' + error);
@@ -183,6 +180,50 @@ router.get("/get-fig-history-by-user", verifyToken, async function (req, res) {
 });
 
 
+
+
+// 이벤트 참여, 일단 get으로
+router.get("/participate-event/:uid", async function(req, res){
+  try {
+    console.log('mobile participate-event');
+    var uid = req.params.uid;
+    var result = await mobile_event_controller.participateEvent(req, res); // 0: 참여 성공, 1: 참여 실패, 2: 이미 참여한 이벤트
+    if (result == 0) {
+      res.json({
+        resp: true,
+        message: 'participate event',
+        uid : uid,
+        openLink: true, // 클라이언트에서 이 값이 true이면 외부 링크 열기
+        link: 'https://docs.google.com/forms/d/1jWdwLSUWapjCglekQT9zUvO7XGei57aLSsZYNL9H27w/edit?ts=654c91d5'
+      });
+    } else if (result == 1) {
+      res.json({
+        resp: false,
+        message: '무화과가 부족합니다.',
+        uid : uid
+      });
+    } else if (result == 2) {
+      res.json({
+        resp: false,
+        message: '이미 참여한 이벤트입니다.',
+        uid : uid
+      });
+    } else {
+      res.json({
+        resp: false,
+        message: 'Failure participate event',
+        uid : uid
+      });
+    }
+  } catch(error) {
+    console.log('mobile-event-router participate-event error:' + error);
+    res.json({
+      resp: false,
+      message: 'Failure participate event',
+      uid : uid
+    });
+  }
+});
 
 
 module.exports = router;
