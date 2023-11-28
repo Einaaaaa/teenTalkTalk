@@ -92,8 +92,9 @@ exports.getPolicyById = async function(req, res) {
 exports.getSearchPolicy = async function(req, res) {
     // console.log('policy-service getSearchPolicy : ',req.params.searchValue);
     var conn;
-    var searchValue =  req.query.searchValue;
-    // var searchValue = '%' + req.query.searchValue + '%';
+    // var searchValue =  req.query.searchValue;
+    // var searchValue =  req.params.searchValue;
+    var searchValue = '%' + req.params.searchValue + '%';
     
 
     // var sortOrderCode = req.params.sortOrderCode;
@@ -103,47 +104,48 @@ exports.getSearchPolicy = async function(req, res) {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnection');
 
-        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE '%" + searchValue + "%' OR content LIKE '" + searchValue + "'";
-        
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE '" + searchValue + "' OR content LIKE '" + searchValue + "'";
+       
         // var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE ? OR content LIKE ?";
         // var queryParams = [searchValue, searchValue];
 
-        var sortOrderCode = req.query.sortOrderCode;
-        console.log(sortOrderCode);
+        // var sortOrderCode = req.query.sortOrderCode;
+        // console.log(sortOrderCode);
 
 
 
-        if (sortOrderCode === '0') {
-            // 최신순으로 정렬
-            query += " ORDER BY board_idx DESC;";
-        } else if (sortOrderCode === '1') {
-            // 등록 순으로 정렬
-            query += " ORDER BY board_idx ASC;";
-        } else if (sortOrderCode === '2') {
-           // 스크랩 수 많은 순으로 정렬
-           query += " ORDER BY count_scraps DESC;";
-        } else if (sortOrderCode === '3') {
-            // 스크랩 수 적은 순으로 정렬
-            query += " ORDER BY count_scraps ASC;";
-        } else if (sortOrderCode === '4') {
-            // 마감일 순으로 정렬
-            query += " ORDER BY application_end_date ASC;";
-        } else if (sortOrderCode === '5') {
+        // if (sortOrderCode === '0') {
+        //     // 최신순으로 정렬
+        //     query += " ORDER BY board_idx DESC;";
+        // } else if (sortOrderCode === '1') {
+        //     // 등록 순으로 정렬
+        //     query += " ORDER BY board_idx ASC;";
+        // } else if (sortOrderCode === '2') {
+        //    // 스크랩 수 많은 순으로 정렬
+        //    query += " ORDER BY count_scraps DESC;";
+        // } else if (sortOrderCode === '3') {
+        //     // 스크랩 수 적은 순으로 정렬
+        //     query += " ORDER BY count_scraps ASC;";
+        // } else if (sortOrderCode === '4') {
+        //     // 마감일 순으로 정렬
+        //     query += " ORDER BY application_end_date ASC;";
+        // } else if (sortOrderCode === '5') {
             
-            // 조회수 높은 순으로 정렬
-            query += " ORDER BY count_views DESC;";
-        }  
-        else if (sortOrderCode === '6') {
-            // 조회수 낮은 순으로 정렬
-           query += " ORDER BY count_views ASC;";
-        }  
-        else {
-            // 기본적으로 등록 순으로 정렬
-            query += " ORDER BY board_idx ASC;";
-        }
+        //     // 조회수 높은 순으로 정렬
+        //     query += " ORDER BY count_views DESC;";
+        // }  
+        // else if (sortOrderCode === '6') {
+        //     // 조회수 낮은 순으로 정렬
+        //    query += " ORDER BY count_views ASC;";
+        // }  
+        // else {
+        //     // 기본적으로 등록 순으로 정렬
+        //     query += " ORDER BY board_idx ASC;";
+        // }
         
-        // console.log(query);
+        console.log(query);
         var rows = await conn.query(query); // 쿼리 실행
+        console.log(rows[0]);
         return rows;
     } catch(error){
         console.log('policy-service getSearchPolicy:'+error);
