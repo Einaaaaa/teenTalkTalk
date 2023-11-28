@@ -108,6 +108,9 @@ class _PolicyListPageState extends State<PolicyListPage> {
     super.initState();
     policyId = widget.policyId;
 
+    final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    policyBloc.add(OnIsSearchPolicyEvent(false));
+
     // 정책 공유 링크를 통해 들어온 경우 해당 정책 정보 불러오기
     if (policyId != null) {
       getSharedPolicy(policyId!);
@@ -137,6 +140,11 @@ class _PolicyListPageState extends State<PolicyListPage> {
     }
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> getSharedPolicy(String policyId) async {
     List<Policy> policies = await policyService.getPolicyById(policyId);
     if (policies.isNotEmpty) {
@@ -161,9 +169,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // String selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
-    // print(_isSelectingCategory);
-
     selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
 
     final policyInstitution = widget.selectedCodes.policyInstitution;
@@ -272,7 +277,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                             },
                           );
                         } else {
-                          // print(selectedSortOrderCode);
                           return FutureBuilder<List<Policy>>(
                             future: policyService
                                 .getAllPolicy(selectedSortOrderCode),

@@ -46,13 +46,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    final authState = BlocProvider.of<AuthBloc>(context).state;
+    // final authState = BlocProvider.of<AuthBloc>(context).state;
 
     // if (authState is SuccessAuthentication) {
     //   checkEventParticipation();
     // }
   }
 
+  @override
   void dispose() {
     super.dispose();
   }

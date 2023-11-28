@@ -92,7 +92,7 @@ class PolicyServices {
       );
 
       // Print the response body for debugging
-      print('Response body: ${resp.body}');
+      // print('Response body: ${resp.body}');
 
       try {
         final listPolicies =
