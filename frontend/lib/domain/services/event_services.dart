@@ -110,7 +110,7 @@ class EventServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/event//participate-event'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    print('submitFigEventParticipation');
+    // print('submitFigEventParticipation');
     print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));

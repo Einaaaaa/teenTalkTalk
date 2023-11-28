@@ -125,7 +125,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                     text: '무화과 ',
                                   ),
                                   TextCustom(
-                                    text: '3개',
+                                    text: '2개',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(

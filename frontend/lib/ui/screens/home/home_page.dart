@@ -10,6 +10,7 @@ import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_event.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_eventParticipation.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
@@ -161,6 +162,13 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // BtnNaru(
+                  //   text: 'test',
+                  //   width: 30,
+                  //   onPressed: () {
+                  //     modalEventParticipation(context, '참여 완료!', 'http');
+                  //   },
+                  // ),
                   // 배너 슬라이드
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),

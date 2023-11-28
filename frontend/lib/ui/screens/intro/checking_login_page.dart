@@ -53,7 +53,9 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
             context, routeFade(page: const HomePage()), (_) => false);
       }
 
-      _initDynamicLinks(); // 로그인/아웃 상태 처리 후 다이나믹 링크 이동 함수 호출
+      if (mounted) {
+        _initDynamicLinks(); // 로그인/아웃 상태 처리 후 다이나믹 링크 이동 함수 호출
+      }
     });
   }
 

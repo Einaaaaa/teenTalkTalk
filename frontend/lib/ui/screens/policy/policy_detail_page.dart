@@ -113,35 +113,36 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
         home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: ThemeColors.primary,
-                ),
-                onPressed: () => Navigator.pop(context),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: ThemeColors.primary,
               ),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.share,
-                    color: ThemeColors.primary,
-                  ),
-                  padding: const EdgeInsets.only(right: 20),
-                  onPressed: () async {
-                    if (hasEventParticipated) {
-                      eventService.giveFigForWeeklyFigChallenge('4');
-                      modalGetFig(context, '4');
-                    }
-                    // _shareURL(policyName, imgUrl, policyId);
-                    policyService.getPolicyById(policyId);
-                    String dynamicLink = await buildPolicyDynamicLink(policyId);
-                    KakaoShareServices.kakaoSharePolicy(
-                        policyName, imgUrl, dynamicLink);
-                  },
-                ),
-              ]),
+              onPressed: () => Navigator.pop(context),
+            ),
+            // actions: [
+            //   IconButton(
+            //     icon: const Icon(
+            //       Icons.share,
+            //       color: ThemeColors.primary,
+            //     ),
+            //     padding: const EdgeInsets.only(right: 20),
+            //     onPressed: () async {
+            //       if (hasEventParticipated) {
+            //         eventService.giveFigForWeeklyFigChallenge('4');
+            //         modalGetFig(context, '4');
+            //       }
+            //       // _shareURL(policyName, imgUrl, policyId);
+            //       policyService.getPolicyById(policyId);
+            //       String dynamicLink = await buildPolicyDynamicLink(policyId);
+            //       KakaoShareServices.kakaoSharePolicy(
+            //           policyName, imgUrl, dynamicLink);
+            //     },
+            //   ),
+            // ]
+          ),
           body: SafeArea(
               child: SingleChildScrollView(
                   child: Center(

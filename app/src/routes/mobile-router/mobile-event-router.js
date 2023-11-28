@@ -192,7 +192,7 @@ router.get("/participate-event", verifyToken, async function(req, res){
     if (result == 0) {
       res.json({
         resp: true,
-        message: 'participate event',
+        message: '참여 완료!',
         uid : uid,
         openLink: true, // 클라이언트에서 이 값이 true이면 외부 링크 열기
         link: 'https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform?usp=sf_link'
