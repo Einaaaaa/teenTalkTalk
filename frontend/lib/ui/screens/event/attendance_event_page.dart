@@ -46,6 +46,9 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 10.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -59,22 +62,20 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 30.h,
                 ),
                 TextCustom(
                     text: "매일 출석체크하고 무화과를 모아요",
                     color: Colors.white,
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600),
+
+                // TextCustom(
+                //     text: "2023.10.01 ~ 2023.10.31",
+                //     color: Colors.white,
+                //     fontSize: 12.sp),
                 SizedBox(
-                  height: 5.h,
-                ),
-                TextCustom(
-                    text: "2023.10.01 ~ 2023.10.31",
-                    color: Colors.white,
-                    fontSize: 12.sp),
-                SizedBox(
-                  height: 20.h,
+                  height: 30.h,
                 ),
                 Container(
                   // height: MediaQuery.of(context).size.height.h / 1.34.h,
@@ -236,23 +237,23 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 5.h,
-                        margin: EdgeInsets.only(top: 20.h, bottom: 20.h),
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(247, 248, 250, 1),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          margin: EdgeInsets.only(left: 22.w),
-                          child: TextCustom(
-                              text: "유의사항",
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
+                      // Container(
+                      //   height: 5.h,
+                      //   margin: EdgeInsets.only(top: 20.h, bottom: 20.h),
+                      //   decoration: const BoxDecoration(
+                      //     color: Color.fromRGBO(247, 248, 250, 1),
+                      //   ),
+                      // ),
+                      // Align(
+                      //   alignment: Alignment.topLeft,
+                      //   child: Container(
+                      //     margin: EdgeInsets.only(left: 22.w),
+                      //     child: TextCustom(
+                      //         text: "유의사항",
+                      //         fontSize: 20.sp,
+                      //         fontWeight: FontWeight.w700),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 100.h,
                       )

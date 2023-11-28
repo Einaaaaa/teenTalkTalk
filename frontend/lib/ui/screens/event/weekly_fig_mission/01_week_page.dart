@@ -133,10 +133,10 @@ class FirstWeekMissionPage extends StatelessWidget {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              TextCustom(
-                                text: '기간 : 2023.10.01 ~ 2023.10.07',
-                                fontSize: 13.sp,
-                              ),
+                              // TextCustom(
+                              //   text: '기간 : 2023.10.01 ~ 2023.10.07',
+                              //   fontSize: 13.sp,
+                              // ),
                             ]),
                           ),
                           SizedBox(

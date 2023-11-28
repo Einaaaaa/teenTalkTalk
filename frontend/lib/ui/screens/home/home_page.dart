@@ -46,11 +46,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // final authState = BlocProvider.of<AuthBloc>(context).state;
+    final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    // if (authState is SuccessAuthentication) {
-    //   checkEventParticipation();
-    // }
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
   }
 
   @override
@@ -72,8 +72,7 @@ class _HomePageState extends State<HomePage> {
       modalEvent(context,
           onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const NewWeeklyFigEventPage()),
+                MaterialPageRoute(builder: (context) => const EventPage()),
               ));
       // Navigator.push(
       //   context,
@@ -745,6 +744,21 @@ class PolicyCarousel extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(15.w),
             decoration: BoxDecoration(
+              // gradient: LinearGradient(
+              //   colors: [
+              //     ThemeColors.primary,
+              //     ThemeColors.secondary,
+              //     Colors.white,
+              //   ],
+              //   begin: Alignment.topCenter,
+              //   end: Alignment.bottomCenter,
+              //   stops: [
+              //     0.3,
+              //     0.6,
+              //     0.9,
+              //   ],
+              //   tileMode: TileMode.clamp,
+              // ),
               color: ThemeColors.primary,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               boxShadow: [
