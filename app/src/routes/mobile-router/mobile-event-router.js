@@ -195,7 +195,7 @@ router.get("/participate-event", verifyToken, async function(req, res){
         message: 'participate event',
         uid : uid,
         openLink: true, // 클라이언트에서 이 값이 true이면 외부 링크 열기
-        link: 'https://docs.google.com/forms/d/1jWdwLSUWapjCglekQT9zUvO7XGei57aLSsZYNL9H27w/edit?ts=654c91d5'
+        link: 'https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform?usp=sf_link'
       });
     } else if (result == 1) {
       res.json({
