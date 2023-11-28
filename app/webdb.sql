@@ -111,14 +111,49 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('02
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('03','0','10대'),('03','1','20대'),('03','2','30대'),('03','3','40대'),('03','4','50대'),('03','5','60대 이상'),('03','6','선택 안함');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('04','0','남자'),('04','1','여자'),('04','2','선택 안함');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('05','00','영암읍'),('05','01','삼호읍'),('05','02','덕진면'),('05','03','금정면'),('05','04','신북면'),('05','05','시종면'),('05','06','도표면'),('05','07','군서면'),('05','08','서호면'),('05','09','학산면'),('05','10','미암면');
-insert into tb_common_code_detail (code,code_detail,code_detail_name) values('06','00','부부/임산부'),('06','01','영유아'),('06','02','청소년/학생'),('06','03','청년/대학생'),('06','04','직장인'),('06','05','중장년'),('06','06','노인'),('06','07','선택 안함');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('06','00','유아기'),('06','01','아동/청소년기'),('06','02','청년기'),('06','03','장/노년기'),('06','04','전생애'),('06','05','결혼'),('06','06','임신/출산'),('06','07','귀농/귀촌');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('07','00','영암군'),('07','01','청소년 수련관'),('07','02','방과후 아카데미'),('07','03','청소년상담복지센터'),('07','04','학교밖지원센터'),('07','05','삼호읍청소년문화의집');
-insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','상담'),('08','02','취업/이직'),('08','03','생활비'),('08','04','건강'),('08','05','주거'),('08','06','결혼/양육'),('08','07','청소년활동'),('08','08','학교밖청소년'),('08','09','돌봄');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','청소년활동'),('08','02','학교밖청소년'),('08','03','상담/돌봄'),('08','04','주거'),('08','05','취업/이직'),('08','06','생활비'),('08','07','건강');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('10','00','앱 사용법을 모르겠어요'),('10','01','더이상 쓰지 않는 앱이에요'),('10','02','불편해요'),('10','03','앱 속도가 너무 느려요'),('10','04','보안이 걱정돼요'),('10','05','오류 때문에 쓸 수 없어요'),('10','06','알림이 너무 많아요'),('10','07','기타(텍스트 입력)');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('11','00','이용 문의'),('11','01','불편 사항'),('11','02','오류 신고'),('11','03','기타'); 
-insert into tb_common_code_detail (code,code_detail,code_detail_name) values('12','00','유아기'),('12','01','아동/청소년기'),('12','02','청년기'),('12','03','장/노년기'),('12','04','전생애'),('12','05','결혼'),('12','06','임신/출산'),('12','07','귀농/귀촌'); -- 생애 주기 추가
 
+
+-- 정책 대상 목록 > 생애주기별로 수정
+UPDATE webdb.tb_common_code_detail
+SET code_detail_name = 
+    CASE 
+        WHEN code_detail = '00' THEN '유아기'
+        WHEN code_detail = '01' THEN '아동/청소년기'
+        WHEN code_detail = '02' THEN '청년기'
+        WHEN code_detail = '03' THEN '장/노년기'
+        WHEN code_detail = '04' THEN '전생애'
+        WHEN code_detail = '05' THEN '결혼'
+        WHEN code_detail = '06' THEN '임신/출산'
+        WHEN code_detail = '07' THEN '귀농/귀촌'
+        ELSE code_detail_name
+    END
+WHERE code = '06' AND code_detail IN ('00', '01', '02', '03', '04', '05', '06', '07');
+
+-- 정책 분야에서 생애주기와 겹치는 결혼/육아 삭제하고 목록 10개에서 8개로 수정
+UPDATE webdb.tb_common_code_detail
+SET code_detail_name = 
+    CASE 
+        WHEN code_detail = '00' THEN '학업'
+        WHEN code_detail = '01' THEN '청소년활동'
+        WHEN code_detail = '02' THEN '학교밖청소년'
+        WHEN code_detail = '03' THEN '상담/돌봄'
+        WHEN code_detail = '04' THEN '주거'
+        WHEN code_detail = '05' THEN '취업/이직'
+        WHEN code_detail = '06' THEN '생활비'
+        WHEN code_detail = '07' THEN '건강'
+        ELSE code_detail_name
+    END
+WHERE code = '08' AND code_detail IN ('00', '01', '02', '03', '04', '05', '06', '07');
+
+
+DELETE FROM webdb.tb_common_code_detail WHERE code = '08' AND code_detail = '08';
+DELETE FROM webdb.tb_common_code_detail WHERE code = '08' AND code_detail = '09';
 
 
 -- 이용 약관
