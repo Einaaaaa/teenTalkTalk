@@ -51,6 +51,7 @@ router.get('/', ensureAuth, accessAuth(2), asyncHandler(async function (req, res
       code_data: code_data,
       page: crtpage, //현재 페이지
       totalPage: totalPage, //총 페이지 수
+      user_role: req.session.user.data.user_role, //권한
       codeName: codeName.user_code_to_name,
       emd_code_to_name: codeName.emd_code_to_name,
       user_type_to_name: codeName.user_type_to_name,
