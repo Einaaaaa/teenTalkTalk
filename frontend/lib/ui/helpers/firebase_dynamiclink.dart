@@ -29,7 +29,7 @@ Future<String> buildInvitationDynamicLink(String invite_code) async {
     uriPrefix:
         "https://teentalktalk.page.link", // Firebase Dynamic Links 도메인 주소
     link: Uri.parse(
-        'https://teentalktalk.page.link/invitation?code=$invite_code'), // 정책 ID를 링크에 추가
+        'https://teentalktalk.page.link/invitation?code=$invite_code'), // 추천인 코드를 링크에 추가
     androidParameters: const AndroidParameters(
       packageName: "com.naru.teenTalkTalk", // 안드로이드 앱 패키지 이름
     ),

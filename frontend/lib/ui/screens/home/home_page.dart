@@ -160,15 +160,16 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20).w,
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // BtnNaru(
-                  //   text: 'test',
-                  //   width: 30,
-                  //   onPressed: () {
-                  //     modalEventParticipation(context, '참여 완료!', 'http');
-                  //   },
-                  // ),
+                  //   BtnNaru(
+                  //     text: 'test',
+                  //     width: 30,
+                  //     onPressed: () {
+                  //       modalScrap(context);
+                  //     },
+                  //   ),
+
                   // 배너 슬라이드
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),
@@ -723,7 +724,6 @@ class _ShimerLoadingPopularPolicy extends StatelessWidget {
 }
 
 // 정책 바로가기
-// ...
 
 class PolicyCarousel extends StatelessWidget {
   final List<Policy> policies;
@@ -753,6 +753,24 @@ class PolicyCarousel extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.all(15.w),
               decoration: BoxDecoration(
+<<<<<<< Updated upstream
+=======
+                // gradient: LinearGradient(
+                //   colors: [
+                //     ThemeColors.primary,
+                //     ThemeColors.secondary,
+                //     Colors.white,
+                //   ],
+                //   begin: Alignment.topCenter,
+                //   end: Alignment.bottomCenter,
+                //   stops: [
+                //     0.3,
+                //     0.6,
+                //     0.9,
+                //   ],
+                //   tileMode: TileMode.clamp,
+                // ),
+>>>>>>> Stashed changes
                 color: ThemeColors.primary,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 boxShadow: [
@@ -769,6 +787,7 @@ class PolicyCarousel extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: TextCustom(
+<<<<<<< Updated upstream
                       text: policy.policy_name,
                       color: Colors.white,
                       fontSize: 15.sp,
@@ -776,6 +795,15 @@ class PolicyCarousel extends StatelessWidget {
                       maxLines: 2,
                       height: 1.5,
                       textAlign: TextAlign.center),
+=======
+                    text: policy.policy_name,
+                    color: Colors.white,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w600,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ),
+>>>>>>> Stashed changes
                 ),
               )),
         );

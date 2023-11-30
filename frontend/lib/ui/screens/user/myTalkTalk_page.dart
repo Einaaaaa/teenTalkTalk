@@ -12,6 +12,7 @@ import 'package:teentalktalk/ui/screens/login/login_page.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
+import 'package:teentalktalk/ui/screens/settings/notice_page.dart';
 import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
 import 'package:teentalktalk/ui/screens/user/my_fig_history_page.dart';
 import 'package:teentalktalk/ui/screens/user/privacy_setting_page.dart';
@@ -109,6 +110,29 @@ class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
                             // SizedBox(
                             //   height: 15.h,
                             // ),
+                            ListTile(
+                              contentPadding: const EdgeInsets.all(5),
+                              leading: Image.asset(
+                                'images/aco2.png',
+                                width: 40.w,
+                                height: 40.h,
+                              ),
+                              title: TextCustom(
+                                text: "공지사항",
+                                fontSize: 18.sp,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: ThemeColors.basic,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const NoticePage(),
+                                    ));
+                              },
+                            ),
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
                               leading: Image.asset(

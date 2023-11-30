@@ -11,7 +11,10 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height / 10,
+<<<<<<< Updated upstream
       padding: EdgeInsets.only(top: 5),
+=======
+>>>>>>> Stashed changes
       decoration: BoxDecoration(
           color: isReel ? Colors.black : Colors.white,
           boxShadow: const [

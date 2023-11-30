@@ -204,7 +204,7 @@ exports.participateEvent = async function(req, res) {
     if(event_part[0].event_part == 1) { // 이미 이벤트 참여 이력 있음
       resultcode = 2;
       return resultcode;
-    } else if(event_part[0].fig < 3) { // 무화과 30개 미만, 참여 실패
+    } else if(event_part[0].fig < 30) { // 무화과 30개 미만, 참여 실패
       resultcode = 1;
       return resultcode;
     }

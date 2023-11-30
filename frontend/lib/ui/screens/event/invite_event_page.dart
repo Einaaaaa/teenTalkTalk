@@ -102,6 +102,10 @@ class _InviteEventPageState extends State<InviteEventPage> {
     // server 연결해서 로그인 후 유저 정보 안받아와짐
     final userBloc = BlocProvider.of<UserBloc>(context);
     late String inviteCode = generateInviteCode(userBloc.state.user!.uid);
+    String inviteLink =
+        "https://docs.google.com/forms/d/e/1FAIpQLScFYiMm6znW_w56dDHghu7MNxEL74ffaT0wYS02diT12AUHnQ/viewform";
+    String inviteMsg =
+        '''💌청소년 톡talk 초대장 도착💌\n영암군 청소년톡talk 테스터 모집 중!!\n\n- 초대 코드 : ${inviteCode} \n-  신청 방법 : ${inviteLink}\n\n구글폼 작성 후 청소년 톡talk 앱(apk 파일)을 다운 받아 청소년 톡talk을 체험해보세요! 친구가 보내준 초대 코드를 입력하면 혜택이 있어요''';
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -263,21 +267,40 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 //     await buildInvitationDynamicLink(
                                 //         inviteCode);
 
+<<<<<<< Updated upstream
                                 String invite_link =
                                     "https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform";
 
                                 KakaoShareServices.kakaoInviteFriends(
                                     inviteCode, invite_link);
+=======
+                                // KakaoShareServices.kakaoInviteFriends(
+                                //     inviteCode);
+
+                                Clipboard.setData(
+                                    ClipboardData(text: inviteMsg));
+>>>>>>> Stashed changes
                               }
                             },
                             child: Center(
                               child: TextCustom(
-                                text: "카카오톡으로 초대하기",
-                                fontSize: 18.sp,
+                                text: "친구 초대하기",
+                                fontSize: 24.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Center(
+                        child: TextCustom(
+                          text: "클립보드에 복사된 내용을 붙여넣기 해서 친구에게 공유해주세요!",
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.basic,
+                        ),
                       ),
 
                       Neumorphic(

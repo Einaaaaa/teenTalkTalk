@@ -67,25 +67,25 @@ class SettingsPage extends StatelessWidget {
               //   height: 2.h,
               //   color: Colors.grey[200],
               // ),
-              ListTile(
-                contentPadding: const EdgeInsets.only(left: 30, right: 30),
-                title: TextCustom(
-                  text: "공지 사항",
-                  fontSize: 18.sp,
-                ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: ThemeColors.basic,
-                ),
-                onTap: () {
-                  // modalPreparing(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NoticePage(),
-                      ));
-                },
-              ),
+              // ListTile(
+              //   contentPadding: const EdgeInsets.only(left: 30, right: 30),
+              //   title: TextCustom(
+              //     text: "공지 사항",
+              //     fontSize: 18.sp,
+              //   ),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios_rounded,
+              //     color: ThemeColors.basic,
+              //   ),
+              //   onTap: () {
+              //     // modalPreparing(context);
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const NoticePage(),
+              //         ));
+              //   },
+              // ),
               ListTile(
                 contentPadding: const EdgeInsets.only(left: 30, right: 30),
                 title: TextCustom(
