@@ -297,13 +297,6 @@ create table webdb.`tb_inquiry`(
 )engine=InnoDB default charset=utf8;
 
 
---dau
-create table webdb.`tb_dau`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) NOT NULL,
-  `dau_date` timestamp not null default current_timestamp,
-  PRIMARY KEY (`board_idx`) USING BTREE
-)engine=InnoDB default charset=utf8;
 
 
 -- 외래 키 제약 조건 삭제

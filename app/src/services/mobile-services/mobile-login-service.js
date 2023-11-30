@@ -80,8 +80,6 @@ exports.KakaoSignIn = async function(req) {
   
     // 사용자 정보(아이디, 이메일)
     const userdb = await conn.query("SELECT uid, userid, user_email FROM webdb.tb_user WHERE userid = ? AND user_email = ?;", [id, user_email]);
-    var query = "INSERT INTO webdb.tb_dau (uid) values ('" + userdb[0].uid + "');";
-    await conn.query(query);
     if (userdb && userdb[0]) {
       json.data = userdb[0];
       return json;
