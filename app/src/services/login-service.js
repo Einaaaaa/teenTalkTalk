@@ -97,7 +97,6 @@ exports.signUp = async function(req, res) {
           const uidUser = uuidv4();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.user_name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
-          console.log(query)
           console.log('회원 등록에 성공했습니다.');
           json.code = 0;
           json.msg = "회원 등록에 성공했습니다.";
