@@ -78,7 +78,6 @@ exports.signUp = async function(req, res) {
     var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
-    console.log(req.body.user_email)
     if(name=='' || req.body.user_email=='' || req.body.password=='' || req.body.password2=='') {
       json.code = 200;
       console.log('dataif-service update: empty data');
