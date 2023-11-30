@@ -63,19 +63,36 @@ class KakaoShareService {
     }
   }
 
+  // // 카카오톡 친구초대 메시지 템플릿
+  // FeedTemplate inviteFriendsTemplate(String invite_code, String link) {
+  //   // print(policyImgLink);
+  //   Content content = Content(
+  //       title: '💌청소년 톡talk 초대장 도착💌',
+  //       description: '초대코드 : $invite_code 입력하고 무화과 포인트를 받아보세요!',
+  //       imageUrl: Uri.parse('images/invitation_event.png'),
+  //       link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)));
+  //   FeedTemplate template = FeedTemplate(content: content, buttons: [
+  //     Button(
+  //         title: "초대 수락하기",
+  //         link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)))
+  //   ]
+  //   );
+
+  //   return template;
+  // }
+
   // 카카오톡 친구초대 메시지 템플릿
   FeedTemplate inviteFriendsTemplate(String invite_code, String link) {
     // print(policyImgLink);
     Content content = Content(
-        title: '💌청소년 톡talk 초대장 도착💌',
-        description: '초대코드 : $invite_code 입력하고 무화과 포인트를 받아보세요!',
-        imageUrl: Uri.parse('images/invitation_event.png'),
-        link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)));
-    FeedTemplate template = FeedTemplate(content: content, buttons: [
-      Button(
-          title: "초대 수락하기",
-          link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)))
-    ]);
+      title: '💌청소년 톡talk 초대장 도착💌',
+      description: '초대코드 : $invite_code 입력하고 무화과 포인트를 받아보세요!',
+      imageUrl: Uri.parse('images/invitation_event.png'),
+      link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)),
+    );
+
+    // Omit the buttons parameter to remove the button
+    FeedTemplate template = FeedTemplate(content: content);
 
     return template;
   }

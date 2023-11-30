@@ -336,24 +336,24 @@ class _InviteEventPageState extends State<InviteEventPage> {
                       SizedBox(
                         height: 28.h,
                       ),
-                      Center(
-                        child: Container(
-                          height: 8.h,
-                          decoration: const BoxDecoration(
-                            color: Color.fromRGBO(247, 248, 250, 1),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: 20.w, top: 15.h, right: 20.w),
-                        child: TextCustom(
-                            text: "유의사항",
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      // Center(
+                      //   child: Container(
+                      //     height: 8.h,
+                      //     decoration: const BoxDecoration(
+                      //       color: Color.fromRGBO(247, 248, 250, 1),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Container(
+                      //   margin:
+                      //       EdgeInsets.only(left: 20.w, top: 15.h, right: 20.w),
+                      //   child: TextCustom(
+                      //       text: "유의사항",
+                      //       fontSize: 20.sp,
+                      //       fontWeight: FontWeight.bold),
+                      // ),
                       SizedBox(
-                        height: 100.h,
+                        height: 30.h,
                       )
                     ],
                   ),

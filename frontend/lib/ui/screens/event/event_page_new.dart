@@ -7,8 +7,11 @@ import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_eventParticipation.dart';
 import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
+import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/event/invite_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/01_week_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/02_week_page.dart';
@@ -25,9 +28,9 @@ class EventPage extends StatefulWidget {
 }
 
 class EventPageState extends State<EventPage> {
-  late bool hasWeek01Participated = false; // 회원가입
+  late bool hasWeek03Participated = false; // 회원가입
   late bool hasWeek02Participated = false; // 정책 스크랩
-  late bool hasWeek03Participated = false; // 정책 공유
+  late bool hasWeek01Participated = false; // 추천인 입력
 
   final surveyLink = Uri.parse(
       'https://docs.google.com/forms/d/e/1FAIpQLScFYiMm6znW_w56dDHghu7MNxEL74ffaT0wYS02diT12AUHnQ/viewform');
@@ -57,16 +60,16 @@ class EventPageState extends State<EventPage> {
   Future<void> checkEventParticipation() async {
     // true -> 참여 기록 없음. 참여 가능
     // false -> 참여 기록 있음. 참여 불가능
-    var week01 = await eventService.checkEventParticipation('2'); // 회원가입
+    var week03 = await eventService.checkEventParticipation('2'); // 회원가입
     var week02 = await eventService.checkEventParticipation('3'); // 정책 스크랩
-    var week03 = await eventService.checkEventParticipation('4'); // 정책 공유
+    var week01 = await eventService.checkEventParticipation('6'); // 추천인 입력
     // var week04 = await eventService.checkEventParticipation('5');
 
-    print(week01);
+    print(week03);
     setState(() {
-      hasWeek01Participated = !week01.resp;
-      hasWeek02Participated = !week02.resp;
       hasWeek03Participated = !week03.resp;
+      hasWeek02Participated = !week02.resp;
+      hasWeek01Participated = !week01.resp;
       // hasWeek04Participated = !week04.resp;
     });
     // print(hasWeek01Participated);
@@ -78,18 +81,18 @@ class EventPageState extends State<EventPage> {
 
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
-      hasWeek01Participated, // 회원가입
+      hasWeek03Participated, // 회원가입
       hasWeek02Participated, // 정책 스크랩
-      hasWeek03Participated, // 정책 공유
+      hasWeek01Participated, // 추천인 입력
       // hasWeek04Participated
     ];
 
     List<String> challengeList = [
       "하루 한 번, 출석 체크하고 무화과 받기",
       "친구 초대하고 함께 무화과 받기",
+      "하루 이내 초대 코드 입력하고 무화과 받기",
       "청소년 톡talk 가입하고 무화과 받기",
       "꾹~ 정책 스크랩하고 무화과 받기",
-      "너도 해봐! 정책 공유하고 무화과 받기"
     ];
 
     return MaterialApp(
@@ -250,7 +253,7 @@ class EventPageState extends State<EventPage> {
                     num: 3,
                     text: challengeList[2],
                     // imagePath: 'images/event_icon/icon_03.svg',
-                    iconData: Icons.person_pin_outlined,
+                    iconData: Icons.keyboard,
                     color: Color.fromRGBO(212, 113, 125, 1),
                     isCheck: getWeekCheckList[0]),
                 SizedBox(height: 27.h),
@@ -259,7 +262,7 @@ class EventPageState extends State<EventPage> {
                     num: 4,
                     text: challengeList[3],
                     // imagePath: 'images/event_icon/icon_04.svg',
-                    iconData: Icons.bookmark_add_outlined,
+                    iconData: Icons.person_pin_outlined,
                     color: Color.fromRGBO(244, 209, 77, 1),
                     isCheck: getWeekCheckList[1]),
                 SizedBox(height: 27.h),
@@ -268,7 +271,7 @@ class EventPageState extends State<EventPage> {
                     num: 5,
                     text: challengeList[4],
                     // imagePath: 'images/event_icon/icon_05.svg',
-                    iconData: Icons.share,
+                    iconData: Icons.bookmark_add_outlined,
                     color: Color.fromRGBO(180, 114, 192, 1),
                     isCheck: getWeekCheckList[2]),
                 SizedBox(height: 27.h),
@@ -371,7 +374,7 @@ class EventPageState extends State<EventPage> {
 
                 // 이벤트 참여하기 버튼
                 TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // 로그인 O
                       if (authState is SuccessAuthentication) {
                         // 무화과 개수 불러와서 30개 이상인지 판단
@@ -379,7 +382,17 @@ class EventPageState extends State<EventPage> {
                         // 30개 미만이면 modal - '무화과를 더 모아주세요'
                         // 참여 완료 상태에서 버튼 누르면 modal - '이미 참여하였습니다. 만족도 조사는 하셨나요? 만족도 조사까지 해야 상품을 받을 수 있어요!' 등
 
-                        eventService.submitFigEventParticipation();
+                        // eventService.submitFigEventParticipation();
+                        final response =
+                            await eventService.submitFigEventParticipation();
+
+                        if (response.resp) {
+                          modalEventParticipation(
+                              context, response.message, response.link);
+                        } else {
+                          modalAccessDenied(context, response.message,
+                              onPressed: () {});
+                        }
                       } else {
                         // 로그인 X
                         modalCheckLogin(context);
@@ -511,6 +524,18 @@ class EventPageState extends State<EventPage> {
               }
               break;
             case 3:
+              if (authState is SuccessAuthentication) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const InviteCodePage(),
+                    ));
+              } else {
+                modalCheckLogin(context);
+              }
+
+              break;
+            case 4:
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -518,8 +543,9 @@ class EventPageState extends State<EventPage> {
                       FirstWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
+
               break;
-            case 4:
+            case 5:
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -527,15 +553,13 @@ class EventPageState extends State<EventPage> {
                       SecondWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
-              break;
-            case 5:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ThirdWeekMissionPage(hasParticipated: isCheck),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) =>
+              //         ThirdWeekMissionPage(hasParticipated: isCheck),
+              //   ),
+              // );
               break;
 
             default:

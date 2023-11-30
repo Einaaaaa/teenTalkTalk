@@ -125,7 +125,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                     text: '무화과 ',
                                   ),
                                   TextCustom(
-                                    text: '3개',
+                                    text: '2개',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -136,10 +136,10 @@ class SecondWeekMissionPage extends StatelessWidget {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              TextCustom(
-                                text: '기간 : 2023.07.12 ~ 2023.07.18',
-                                fontSize: 13.sp,
-                              ),
+                              // TextCustom(
+                              //   text: '기간 : 2023.07.12 ~ 2023.07.18',
+                              //   fontSize: 13.sp,
+                              // ),
                             ]),
                           ),
                           SizedBox(

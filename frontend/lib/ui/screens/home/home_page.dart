@@ -10,6 +10,7 @@ import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_event.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_eventParticipation.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
@@ -48,11 +49,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    // if (authState is SuccessAuthentication) {
-    //   checkEventParticipation();
-    // }
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -71,8 +73,7 @@ class _HomePageState extends State<HomePage> {
       modalEvent(context,
           onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const NewWeeklyFigEventPage()),
+                MaterialPageRoute(builder: (context) => const EventPage()),
               ));
       // Navigator.push(
       //   context,
@@ -161,6 +162,13 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // BtnNaru(
+                  //   text: 'test',
+                  //   width: 30,
+                  //   onPressed: () {
+                  //     modalEventParticipation(context, '참여 완료!', 'http');
+                  //   },
+                  // ),
                   // 배너 슬라이드
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),
@@ -744,6 +752,21 @@ class PolicyCarousel extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(15.w),
             decoration: BoxDecoration(
+              // gradient: LinearGradient(
+              //   colors: [
+              //     ThemeColors.primary,
+              //     ThemeColors.secondary,
+              //     Colors.white,
+              //   ],
+              //   begin: Alignment.topCenter,
+              //   end: Alignment.bottomCenter,
+              //   stops: [
+              //     0.3,
+              //     0.6,
+              //     0.9,
+              //   ],
+              //   tileMode: TileMode.clamp,
+              // ),
               color: ThemeColors.primary,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               boxShadow: [

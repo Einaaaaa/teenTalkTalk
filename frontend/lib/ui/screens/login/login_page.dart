@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 // import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
@@ -123,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 20,
                         )),
                     const SizedBox(height: 10.0),
+
                     const TextCustom(
                       text: '나를 위한 맞춤 정책을\n관리해보세요',
                       maxLines: 2,
@@ -131,44 +133,65 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 24,
                       color: Colors.black,
                     ),
-                    const SizedBox(height: 50.0), // 아이디
-                    TextFieldNaru(
-                      // enableInteractiveSelection: false,
-                      controller: idController,
-                      focusNode: idFocusNode,
-                      hintText: '아이디 입력',
-                      // keyboardType: TextInputType.emailAddress,
-                      // validator: validatedEmail,
-                      validator: RequiredValidator(errorText: '아이디를 입력해주세요'),
+                    const SizedBox(height: 30.0),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Image.asset(
+                        'images/aco7.png',
+                        width: 150.w,
+                      ),
                     ),
-                    const SizedBox(height: 10.0), // 비밀번호
-                    TextFieldNaru(
-                      // enableInteractiveSelection: false,
-                      controller: passwordController,
-                      focusNode: pwFocusNode,
-                      hintText: '비밀번호 입력',
-                      isPassword: true,
-                      validator: passwordValidator,
-                    ),
-                    const SizedBox(height: 40.0),
-                    BtnNaru(
-                      text: '로그인',
-                      fontSize: 20,
-                      height: 48,
-                      width: size.width,
-                      fontWeight: FontWeight.bold,
-                      colorText: Colors.white,
-                      onPressed: () {
-                        if (_keyForm.currentState!.validate()) {
-                          authBloc.add(OnLoginEvent(idController.text.trim(),
-                              passwordController.text.trim()));
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 20.0),
+                    // TextFieldNaru(
+                    //   // enableInteractiveSelection: false,
+                    //   controller: idController,
+                    //   focusNode: idFocusNode,
+                    //   hintText: '아이디 입력',
+                    //   // keyboardType: TextInputType.emailAddress,
+                    //   // validator: validatedEmail,
+                    //   validator: RequiredValidator(errorText: '아이디를 입력해주세요'),
+                    // ),
+                    // const SizedBox(height: 10.0), // 비밀번호
+                    // TextFieldNaru(
+                    //   // enableInteractiveSelection: false,
+                    //   controller: passwordController,
+                    //   focusNode: pwFocusNode,
+                    //   hintText: '비밀번호 입력',
+                    //   isPassword: true,
+                    //   validator: passwordValidator,
+                    // ),
+                    const SizedBox(height: 10.0),
+                    // BtnNaru(
+                    //   text: '로그인',
+                    //   fontSize: 20,
+                    //   height: 48,
+                    //   width: size.width,
+                    //   fontWeight: FontWeight.bold,
+                    //   colorText: Colors.white,
+                    //   onPressed: () {
+                    //     if (_keyForm.currentState!.validate()) {
+                    //       authBloc.add(OnLoginEvent(idController.text.trim(),
+                    //           passwordController.text.trim()));
+                    //     }
+                    //   },
+                    // ),
+                    // BtnNaru(
+                    //   text: '로그인하기',
+                    //   fontSize: 20,
+                    //   height: 48,
+                    //   width: size.width,
+                    //   fontWeight: FontWeight.bold,
+                    //   colorText: Colors.white,
+                    //   onPressed: () {
+                    //     if (_keyForm.currentState!.validate()) {
+                    //       authBloc.add(OnLoginEvent(idController.text.trim(),
+                    //           passwordController.text.trim()));
+                    //     }
+                    //   },
+                    // ),
+                    // const SizedBox(height: 20.0),
 
                     // BtnNaru(
-                    //   text: '카카오톡 로그아웃 테스트',
+                    //   text: '카카오톡 로그인',
                     //   height: 48,
                     //   fontSize: 20,
                     //   width: size.width,
@@ -177,101 +200,137 @@ class _LoginPageState extends State<LoginPage> {
                     //   // border: Border.all()
                     //   backgroundColor: Colors.yellow,
                     //   onPressed: () async {
-                    //     KakaoLoginServices.kakaoLogout();
+                    //     bool loginSuccess =
+                    //         await KakaoLoginServices.kakaoLogin();
+                    //     if (loginSuccess) {
+                    //       Map<String, String> userInfo =
+                    //           await KakaoLoginServices.kakaoGetUserInfo();
+                    //       // 카카오 계정 중복 체크
+                    //       final bool isFirstKakaoLogin =
+                    //           await authService.checkDuplicateID(
+                    //               userInfo['user_id']!); // db에서 계정 중복 확인
+                    //       if (!isFirstKakaoLogin) {
+                    //         // 가입한 계정이 없으면 가입
+                    //         // ignore: use_build_context_synchronously
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 const userTypePage(isKakaoLogin: true),
+                    //           ),
+                    //         );
+                    //       } else {
+                    //         // 가입한 계정이 있으면 로그인
+                    //         authBloc.add(OnKakaoLoginEvent(
+                    //             userInfo['user_id'] ?? '',
+                    //             userInfo['user_email'] ?? ''));
+                    //       }
+                    //     }
                     //   },
                     // ),
-                    // const SizedBox(height: 20.0),
-                    // BtnNaru(
-                    //   text: '카카오톡 정보',
-                    //   height: 48,
-                    //   fontSize: 20,
-                    //   width: size.width,
-                    //   fontWeight: FontWeight.bold,
-                    //   colorText: Colors.black,
-                    //   // border: Border.all()
-                    //   backgroundColor: Colors.yellow,
-                    //   onPressed: () async {
-                    //     KakaoLoginServices.kakaoPrintUserInfo();
-                    //   },
-                    // ),
-                    // const SizedBox(height: 20.0),
-
-                    BtnNaru(
-                      text: '카카오톡 로그인',
-                      height: 48,
-                      fontSize: 20,
-                      width: size.width,
-                      fontWeight: FontWeight.bold,
-                      colorText: Colors.black,
-                      // border: Border.all()
-                      backgroundColor: Colors.yellow,
-                      onPressed: () async {
-                        bool loginSuccess =
-                            await KakaoLoginServices.kakaoLogin();
-                        if (loginSuccess) {
-                          Map<String, String> userInfo =
-                              await KakaoLoginServices.kakaoGetUserInfo();
-                          // 카카오 계정 중복 체크
-                          final bool isFirstKakaoLogin =
-                              await authService.checkDuplicateID(
-                                  userInfo['user_id']!); // db에서 계정 중복 확인
-                          if (!isFirstKakaoLogin) {
-                            // 가입한 계정이 없으면 가입
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const userTypePage(isKakaoLogin: true),
-                              ),
-                            );
-                          } else {
-                            // 가입한 계정이 있으면 로그인
-                            authBloc.add(OnKakaoLoginEvent(
-                                userInfo['user_id'] ?? '',
-                                userInfo['user_email'] ?? ''));
+                    TextButton(
+                        onPressed: () async {
+                          bool loginSuccess =
+                              await KakaoLoginServices.kakaoLogin();
+                          if (loginSuccess) {
+                            Map<String, String> userInfo =
+                                await KakaoLoginServices.kakaoGetUserInfo();
+                            // 카카오 계정 중복 체크
+                            final bool isFirstKakaoLogin =
+                                await authService.checkDuplicateID(
+                                    userInfo['user_id']!); // db에서 계정 중복 확인
+                            if (!isFirstKakaoLogin) {
+                              // 가입한 계정이 없으면 가입
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const userTypePage(isKakaoLogin: true),
+                                ),
+                              );
+                            } else {
+                              // 가입한 계정이 있으면 로그인
+                              authBloc.add(OnKakaoLoginEvent(
+                                  userInfo['user_id'] ?? '',
+                                  userInfo['user_email'] ?? ''));
+                            }
                           }
-                        }
-                      },
-                    ),
+                        },
+                        child: Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 320.w,
+                            height: 50.h,
+                            padding:
+                                EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 10.h),
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(
+                                    245, 117, 33, 0.8), //ThemeColors.fig_pink,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.r),
+                                ),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(4, 4),
+                                    blurRadius: 15,
+                                    spreadRadius: 1,
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white,
+                                    offset: Offset(-4, -4),
+                                    blurRadius: 15,
+                                    spreadRadius: 1,
+                                  ),
+                                ]),
+                            child: TextCustom(
+                              text: "카카오톡으로 시작하기",
+                              fontSize: 20.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )),
+
                     const SizedBox(height: 5.0),
 
-                    const SizedBox(height: 60.0), // 비밀번호 찾기
+                    // const SizedBox(height: 60.0), // 비밀번호 찾기
 
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                              onTap: () {
-                                // modalPreparing(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const FindIDPage(),
-                                    ));
-                              },
-                              child: const TextCustom(text: '아이디 찾기')),
-                          InkWell(
-                              onTap: () {
-                                // modalPreparing(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FindPasswordPage(),
-                                    ));
-                              },
-                              child: const TextCustom(text: '비밀번호 찾기')),
-                          InkWell(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const termsAgreePage(
-                                      isKakaoLogin: false,
-                                    ),
-                                  )),
-                              child: const TextCustom(text: '회원가입'))
-                        ]),
+                    // Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       InkWell(
+                    //           onTap: () {
+                    //             // modalPreparing(context);
+                    //             Navigator.push(
+                    //                 context,
+                    //                 MaterialPageRoute(
+                    //                   builder: (context) => const FindIDPage(),
+                    //                 ));
+                    //           },
+                    //           child: const TextCustom(text: '아이디 찾기')),
+                    //       InkWell(
+                    //           onTap: () {
+                    //             // modalPreparing(context);
+                    //             Navigator.push(
+                    //                 context,
+                    //                 MaterialPageRoute(
+                    //                   builder: (context) =>
+                    //                       const FindPasswordPage(),
+                    //                 ));
+                    //           },
+                    //           child: const TextCustom(text: '비밀번호 찾기')),
+                    //       InkWell(
+                    //           onTap: () => Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                 builder: (context) => const termsAgreePage(
+                    //                   isKakaoLogin: false,
+                    //                 ),
+                    //               )),
+                    //           child: const TextCustom(text: '회원가입'))
+                    //     ]),
                   ],
                 ),
               ),
