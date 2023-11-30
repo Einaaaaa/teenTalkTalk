@@ -33,7 +33,7 @@ class EventPageState extends State<EventPage> {
   late bool hasWeek01Participated = false; // 추천인 입력
 
   final surveyLink = Uri.parse(
-      'https://docs.google.com/forms/d/e/1FAIpQLScFYiMm6znW_w56dDHghu7MNxEL74ffaT0wYS02diT12AUHnQ/viewform');
+      'https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform');
 
   late String figCount = '-';
 

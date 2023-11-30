@@ -259,11 +259,15 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                     context, '최대 3명까지만 초대할 수 있어요.',
                                     onPressed: () {});
                               } else {
-                                String dynamicLink =
-                                    await buildInvitationDynamicLink(
-                                        inviteCode);
-                                KakaoShareServices.kakaoInviteFreinds(
-                                    inviteCode, dynamicLink);
+                                // String dynamicLink =
+                                //     await buildInvitationDynamicLink(
+                                //         inviteCode);
+
+                                String invite_link =
+                                    "https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform";
+
+                                KakaoShareServices.kakaoInviteFriends(
+                                    inviteCode, invite_link);
                               }
                             },
                             child: Center(
