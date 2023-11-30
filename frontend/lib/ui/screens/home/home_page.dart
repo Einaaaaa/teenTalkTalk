@@ -246,6 +246,7 @@ class _HomePageState extends State<HomePage> {
                     height: 10.h,
                   ),
 
+                  // 정책 바로가기
                   Container(
                       padding: EdgeInsets.all(15.w),
                       child: Column(children: [
@@ -750,43 +751,33 @@ class PolicyCarousel extends StatelessWidget {
             );
           },
           child: Container(
-            padding: EdgeInsets.all(15.w),
-            decoration: BoxDecoration(
-              // gradient: LinearGradient(
-              //   colors: [
-              //     ThemeColors.primary,
-              //     ThemeColors.secondary,
-              //     Colors.white,
-              //   ],
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              //   stops: [
-              //     0.3,
-              //     0.6,
-              //     0.9,
-              //   ],
-              //   tileMode: TileMode.clamp,
-              // ),
-              color: ThemeColors.primary,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1.r,
-                  blurRadius: 3.r,
-                  offset: const Offset(0, 3),
+              padding: EdgeInsets.all(15.w),
+              decoration: BoxDecoration(
+                color: ThemeColors.primary,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.r,
+                    blurRadius: 3.r,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              width: size.width / 2,
+              child: Center(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: TextCustom(
+                      text: policy.policy_name,
+                      color: Colors.white,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      maxLines: 2,
+                      height: 1.5,
+                      textAlign: TextAlign.center),
                 ),
-              ],
-            ),
-            width: size.width / 2,
-            child: TextCustom(
-              text: policy.policy_name,
-              color: Colors.white,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
-              maxLines: 2,
-            ),
-          ),
+              )),
         );
       },
       options: CarouselOptions(
