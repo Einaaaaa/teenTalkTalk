@@ -93,7 +93,7 @@ insert into tb_common_code (code,code_name,code_english_name) values('08','분�
 insert into tb_common_code (code,code_name,code_english_name) values('09','정책 성격','policy_character_code');
 insert into tb_common_code (code,code_name,code_english_name) values('10','탈퇴 사유','withdrawal_reason_code');
 insert into tb_common_code (code,code_name,code_english_name) values('11','질문 유형','inquiry_type_code');
-insert into tb_common_code (code,code_name,code_english_name) values('12','생애 주기','life_cycle_code'); -- 생애 주기 추가
+
 
 -- 공통 코드 설계
 create table webdb.`tb_common_code_detail`(
