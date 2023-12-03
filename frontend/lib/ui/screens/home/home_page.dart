@@ -753,8 +753,6 @@ class PolicyCarousel extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.all(15.w),
               decoration: BoxDecoration(
-<<<<<<< Updated upstream
-=======
                 // gradient: LinearGradient(
                 //   colors: [
                 //     ThemeColors.primary,
@@ -770,7 +768,6 @@ class PolicyCarousel extends StatelessWidget {
                 //   ],
                 //   tileMode: TileMode.clamp,
                 // ),
->>>>>>> Stashed changes
                 color: ThemeColors.primary,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 boxShadow: [
@@ -787,7 +784,6 @@ class PolicyCarousel extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: TextCustom(
-<<<<<<< Updated upstream
                       text: policy.policy_name,
                       color: Colors.white,
                       fontSize: 15.sp,
@@ -795,15 +791,6 @@ class PolicyCarousel extends StatelessWidget {
                       maxLines: 2,
                       height: 1.5,
                       textAlign: TextAlign.center),
-=======
-                    text: policy.policy_name,
-                    color: Colors.white,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w600,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                  ),
->>>>>>> Stashed changes
                 ),
               )),
         );

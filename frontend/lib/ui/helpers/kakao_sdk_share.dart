@@ -76,10 +76,6 @@ class KakaoShareService {
           title: "초대 수락하기",
           link: Link(webUrl: Uri.parse(link), mobileWebUrl: Uri.parse(link)))
     ]);
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     return template;
   }
 
@@ -100,13 +96,6 @@ class KakaoShareService {
   // }
 
   // 카카오톡 친구 초대
-<<<<<<< Updated upstream
-  Future<void> kakaoInviteFriends(String invite_code, String link) async {
-    print(invite_code);
-    // // 사용자 정의 템플릿 ID
-    // int templateId = 94735;
-    // 카카오톡 실행 가능 여부 확인
-=======
   // Future<void> kakaoInviteFriends(String invite_code) async {
   //   // // 사용자 정의 템플릿 ID
   //   // int templateId = 94735;
@@ -144,7 +133,6 @@ class KakaoShareService {
   );
 
   Future<void> kakaoInviteFriends(String invite_code) async {
->>>>>>> Stashed changes
     bool isKakaoTalkSharingAvailable =
         await ShareClient.instance.isKakaoTalkSharingAvailable();
 

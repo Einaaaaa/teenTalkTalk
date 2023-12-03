@@ -902,11 +902,7 @@
       "languageVersion": "2.18"
     }
   ],
-<<<<<<< Updated upstream
-  "generated": "2023-11-30T08:27:13.235350Z",
-=======
-  "generated": "2023-11-30T13:46:49.628152Z",
->>>>>>> Stashed changes
+  "generated": "2023-11-30T15:16:33.923926Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

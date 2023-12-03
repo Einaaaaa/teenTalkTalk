@@ -267,19 +267,11 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 //     await buildInvitationDynamicLink(
                                 //         inviteCode);
 
-<<<<<<< Updated upstream
-                                String invite_link =
-                                    "https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform";
-
-                                KakaoShareServices.kakaoInviteFriends(
-                                    inviteCode, invite_link);
-=======
                                 // KakaoShareServices.kakaoInviteFriends(
                                 //     inviteCode);
 
                                 Clipboard.setData(
                                     ClipboardData(text: inviteMsg));
->>>>>>> Stashed changes
                               }
                             },
                             child: Center(
