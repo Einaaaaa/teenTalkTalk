@@ -98,6 +98,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(isInvitePossible);
     final size = MediaQuery.of(context).size;
     // server 연결해서 로그인 후 유저 정보 안받아와짐
     final userBloc = BlocProvider.of<UserBloc>(context);

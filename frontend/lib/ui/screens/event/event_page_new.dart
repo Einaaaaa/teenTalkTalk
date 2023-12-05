@@ -69,7 +69,6 @@ class EventPageState extends State<EventPage> {
       enteredInvitationCode = !invited.resp; // 추천인 입력
       signedUpTeenTalk = !signedUp.resp; // 회원가입
       scrappedPolicy = !scrapped.resp; // 정책스크랩
-      // hasWeek04Participated = !week04.resp;
     });
     // print(hasWeek01Participated);
   }
@@ -191,7 +190,7 @@ class EventPageState extends State<EventPage> {
                           245, 117, 33, 0.8), //ThemeColors.primary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: TextCustom(
-                    text: '이벤트 기간 : 12/1 ~ 12/14',
+                    text: '이벤트 기간 : 12/1 ~ 12/20',
                     color: Colors.white,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
@@ -246,16 +245,16 @@ class EventPageState extends State<EventPage> {
                   color: Color.fromRGBO(126, 181, 84, 1),
                 ),
                 SizedBox(height: 27.h),
-                // 미션3 - 회원가입
+                // 미션3 - 추천인 입력
                 challengeWidget(
                     num: 3,
                     text: challengeList[2],
                     // imagePath: 'images/event_icon/icon_03.svg',
                     iconData: Icons.keyboard,
-                    color: Color.fromRGBO(212, 113, 125, 1),
+                    color: Color.fromRGBO(57, 12, 17, 1),
                     isCheck: getWeekCheckList[0]),
                 SizedBox(height: 27.h),
-                // 미션4 - 정책 스크랩
+                // 미션4 - 가입
                 challengeWidget(
                     num: 4,
                     text: challengeList[3],
@@ -264,7 +263,7 @@ class EventPageState extends State<EventPage> {
                     color: Color.fromRGBO(244, 209, 77, 1),
                     isCheck: getWeekCheckList[1]),
                 SizedBox(height: 27.h),
-                // 미션5 - 정책 공유
+                // 미션5 - 정책 스크랩
                 challengeWidget(
                     num: 5,
                     text: challengeList[4],
@@ -492,6 +491,7 @@ class EventPageState extends State<EventPage> {
     // required String imagePath, // 아이콘 경로
     bool isCheck = false, // 이벤트 참여 여부
   }) {
+    print(isCheck);
     final authState = BlocProvider.of<AuthBloc>(context).state;
     if (!isCheck) {
       return InkWell(
