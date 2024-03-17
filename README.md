@@ -18,19 +18,19 @@
   </tr>
 </table>
 
-
 ## 기술 스택 & ERD(개체 관계 다이어그램)
 
 <div style="display: flex; justify-content: center;">
-  <div style="margin-right: 20px;">
+  <div style="width: 50%;">
     <p style="text-align: center;">기술 스택</p>
-    <img src="./images/stack.jpg" alt="기술 스택" width="400">
+    <img src="./images/stack.jpg" alt="기술 스택" style="width: 100%;">
   </div>
-  <div>
+  <div style="width: 50%;">
     <p style="text-align: center;">ERD(개체 관계 다이어그램)</p>
-    <img src="./images/erd.png" alt="ERD" width="400">
+    <img src="./images/erd.png" alt="ERD" style="width: 100%;">
   </div>
 </div>
+
 
 
 
