@@ -22,7 +22,7 @@
 
 | 기술 스택                                 | ERD(개체 관계 다이어그램)                   |
 | ---------------------------------------- | ------------------------------------------ |
-| <img src="./images/stack.jpg" alt="기술 스택" style="width: 100%;">         | <img src="./images/erd.png" alt="ERD" style="width: 100%;">                   |
+| <img src="./images/stack.jpg" alt="기술 스택" style="width: 50%;">         | <img src="./images/erd.png" alt="ERD" style="width: 50%;">                   |
 
 
 
