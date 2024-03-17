@@ -7,11 +7,17 @@
 
 ## 어드민 페이지
 
-### 로그인 화면
-![로그인 화면](./images/login.png)
+<table>
+  <tr>
+    <td style="text-align:center">로그인 화면</td>
+    <td style="text-align:center">어드민 대시보드</td>
+  </tr>
+  <tr>
+    <td><img src="./images/login.png" alt="로그인 화면" width="400"></td>
+    <td><img src="./images/admin.png" alt="어드민 대시보드" width="400"></td>
+  </tr>
+</table>
 
-### 어드민 대시보드
-![어드민 대시보드](./images/admin.png)
 
 ## 기술 스택
 
