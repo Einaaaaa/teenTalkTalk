@@ -20,12 +20,16 @@
 
 ## 기술 스택 & ERD(개체 관계 다이어그램)
 
-| 기술 스택                                 | ERD(개체 관계 다이어그램)                   |
-| ---------------------------------------- | ------------------------------------------ |
-| <img src="./images/stack.jpg" alt="기술 스택" style="width: 50%;">         | <img src="./images/erd.png" alt="ERD" style="width: 50%;">                   |
-
-
-
+<table>
+  <tr>
+    <td style="text-align:center">기술 스택</td>
+    <td style="text-align:center">ERD</td>
+  </tr>
+  <tr>
+    <td><img src="./images/stack.jpg" alt="기술 스택" width="400"></td>
+    <td><img src="./images/erd.png" alt="ERD" width="400"></td>
+  </tr>
+</table>
 
 
 
