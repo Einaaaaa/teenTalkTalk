@@ -39,7 +39,7 @@ void modalScrap(
                 )
               ],
             ),
-            SizedBox(height: 10.0.h),
+            // SizedBox(height: 10.0.h),
             Container(
                 padding: EdgeInsets.all(10.h),
                 child: const Icon(

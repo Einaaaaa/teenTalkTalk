@@ -29,7 +29,7 @@ void main() async {
 
   // Kakao SDK
   KakaoSdk.init(
-    nativeAppKey: '1a9e760429b6a71b3b46d729ad6927d4', // 앱 키
+    nativeAppKey: '5d2af2be00c43b9170c3c6dc5c6fd661', // 앱 키
     // javaScriptAppKey: '${YOUR_JAVASCRIPT_APP_KEY}',
     loggingEnabled: true,
   );

@@ -28,9 +28,9 @@ class EventPage extends StatefulWidget {
 }
 
 class EventPageState extends State<EventPage> {
-  late bool hasWeek03Participated = false; // 회원가입
-  late bool hasWeek02Participated = false; // 정책 스크랩
-  late bool hasWeek01Participated = false; // 추천인 입력
+  late bool signedUpTeenTalk = false; // 회원가입
+  late bool scrappedPolicy = false; // 정책 스크랩
+  late bool enteredInvitationCode = false; // 추천인 입력
 
   final surveyLink = Uri.parse(
       'https://docs.google.com/forms/d/e/1FAIpQLSc9TDv2RLTsEb3oy0tmqekps8D-huAiepRX4YGEH_-VRLLENA/viewform');
@@ -60,17 +60,15 @@ class EventPageState extends State<EventPage> {
   Future<void> checkEventParticipation() async {
     // true -> 참여 기록 없음. 참여 가능
     // false -> 참여 기록 있음. 참여 불가능
-    var week03 = await eventService.checkEventParticipation('2'); // 회원가입
-    var week02 = await eventService.checkEventParticipation('3'); // 정책 스크랩
-    var week01 = await eventService.checkEventParticipation('6'); // 추천인 입력
+    var invited = await eventService.checkEventParticipation('6'); // 추천인 입력
+    var signedUp = await eventService.checkEventParticipation('2'); // 회원가입
+    var scrapped = await eventService.checkEventParticipation('3'); // 정책 스크랩
     // var week04 = await eventService.checkEventParticipation('5');
 
-    print(week03);
     setState(() {
-      hasWeek03Participated = !week03.resp;
-      hasWeek02Participated = !week02.resp;
-      hasWeek01Participated = !week01.resp;
-      // hasWeek04Participated = !week04.resp;
+      enteredInvitationCode = !invited.resp; // 추천인 입력
+      signedUpTeenTalk = !signedUp.resp; // 회원가입
+      scrappedPolicy = !scrapped.resp; // 정책스크랩
     });
     // print(hasWeek01Participated);
   }
@@ -81,10 +79,9 @@ class EventPageState extends State<EventPage> {
 
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
-      hasWeek03Participated, // 회원가입
-      hasWeek02Participated, // 정책 스크랩
-      hasWeek01Participated, // 추천인 입력
-      // hasWeek04Participated
+      enteredInvitationCode, // 추천인 입력
+      signedUpTeenTalk, // 회원가입
+      scrappedPolicy, // 정책 스크랩
     ];
 
     List<String> challengeList = [
@@ -193,7 +190,7 @@ class EventPageState extends State<EventPage> {
                           245, 117, 33, 0.8), //ThemeColors.primary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: TextCustom(
-                    text: '이벤트 기간 : 12/1 ~ 12/14',
+                    text: '이벤트 기간 : 12/1 ~ 12/20',
                     color: Colors.white,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
@@ -248,16 +245,16 @@ class EventPageState extends State<EventPage> {
                   color: Color.fromRGBO(126, 181, 84, 1),
                 ),
                 SizedBox(height: 27.h),
-                // 미션3 - 회원가입
+                // 미션3 - 추천인 입력
                 challengeWidget(
                     num: 3,
                     text: challengeList[2],
                     // imagePath: 'images/event_icon/icon_03.svg',
                     iconData: Icons.keyboard,
-                    color: Color.fromRGBO(212, 113, 125, 1),
+                    color: Color.fromRGBO(57, 12, 17, 1),
                     isCheck: getWeekCheckList[0]),
                 SizedBox(height: 27.h),
-                // 미션4 - 정책 스크랩
+                // 미션4 - 가입
                 challengeWidget(
                     num: 4,
                     text: challengeList[3],
@@ -266,7 +263,7 @@ class EventPageState extends State<EventPage> {
                     color: Color.fromRGBO(244, 209, 77, 1),
                     isCheck: getWeekCheckList[1]),
                 SizedBox(height: 27.h),
-                // 미션5 - 정책 공유
+                // 미션5 - 정책 스크랩
                 challengeWidget(
                     num: 5,
                     text: challengeList[4],
@@ -494,6 +491,7 @@ class EventPageState extends State<EventPage> {
     // required String imagePath, // 아이콘 경로
     bool isCheck = false, // 이벤트 참여 여부
   }) {
+    print(isCheck);
     final authState = BlocProvider.of<AuthBloc>(context).state;
     if (!isCheck) {
       return InkWell(

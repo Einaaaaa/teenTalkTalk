@@ -1,12 +1,9 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
-import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
-import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
 import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';

@@ -52,19 +52,19 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     // print(hasEventParticipated);
   }
 
-  Future<void> _shareURL(String policyName, String img, String policyId) async {
-    String dynamicLink = await buildPolicyDynamicLink(policyId);
-    try {
-      await FlutterShare.share(
-        title: policyName,
-        text: 'URL 복사하기',
-        linkUrl: dynamicLink,
-        // chooserTitle: 'Example Chooser Title',
-      );
-    } catch (e) {
-      print('Error sharing : $e');
-    }
-  }
+  // Future<void> _shareURL(String policyName, String img, String policyId) async {
+  //   String dynamicLink = await buildPolicyDynamicLink(policyId);
+  //   try {
+  //     await FlutterShare.share(
+  //       title: policyName,
+  //       text: 'URL 복사하기',
+  //       linkUrl: dynamicLink,
+  //       // chooserTitle: 'Example Chooser Title',
+  //     );
+  //   } catch (e) {
+  //     print('Error sharing : $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
