@@ -19,13 +19,19 @@
 </table>
 
 
-## 기술 스택
+## 기술 스택 & ERD(개체 관계 다이어그램)
 
-![기술 스택](./images/stack.jpg)
+<div style="display: flex; justify-content: center;">
+  <div style="margin-right: 20px;">
+    <p style="text-align: center;">기술 스택</p>
+    <img src="./images/stack.jpg" alt="기술 스택" width="400">
+  </div>
+  <div>
+    <p style="text-align: center;">ERD(개체 관계 다이어그램)</p>
+    <img src="./images/erd.png" alt="ERD" width="400">
+  </div>
+</div>
 
-## ERD(개체 관계 다이어그램)
-
-![ERD](./images/erd.png)
 
 
 #### [벨류업 챗봇](https://github.com/Joonw00/Value_Up_Chatbot)
